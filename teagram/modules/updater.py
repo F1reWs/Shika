@@ -84,11 +84,11 @@ class UpdateMod(loader.Module):
         try:
             await utils.answer(message, 'Попытка обновления...')
 
-            check_output('git stash', shell=True).decode()
-            output = check_output('git pull', shell=True).decode()
+          #  check_output('git stash', shell=True).decode()
+       #     output = check_output('git pull', shell=True).decode()
             
-            if 'Already up to date.' in output:
-                return await utils.answer(message, 'У вас установлена последняя версия ✔')
+        #    if 'Already up to date.' in output:
+         #       return await utils.answer(message, 'У вас установлена последняя версия ✔')
             
             def restart() -> None:
                 os.execl(sys.executable, sys.executable, "-m", "teagram")
