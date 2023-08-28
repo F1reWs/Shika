@@ -1,0 +1,19 @@
+ # ©️ TriggerEarth, 2023
+# This file is a part of teagram Userbot
+# ✳️ https://github.com/HotDrify/teagram
+# You can redistribute it and/or modify it under the terms of the GNU AGPLv3
+# 🍵 https://www.gnu.org/licenses/agpl-3.0.html
+version: "3"
+services:
+    main:
+        container_name: "teagram"
+        build:
+            context: .
+        volumes:
+            - main:/data
+        stop_signal: SIGINT
+        restart: never
+        command: python3 -m teagram
+
+volumes:
+    main:

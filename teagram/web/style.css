@@ -1,0 +1,10 @@
+body{
+    background-color: black;
+    color: white;
+    font-family: monospace;
+}
+.logindiv{
+    text-align: center;
+    justify-content: center;
+    margin-top: 5px;
+}
