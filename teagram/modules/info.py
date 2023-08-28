@@ -28,16 +28,12 @@ class AboutMod(loader.Module):
 
         uptime_raw = round(time.time() - self.boot_time)
         uptime = (timedelta(seconds=uptime_raw))
-        
-        last = str(await bash_exec('git log -1')).split()[1].strip()
-        now = str(await bash_exec('git rev-parse HEAD')).strip()
-        version = f'`v{__version__}`' + (' <b>Доступно обновление</b>' if last != now else "")
 
         me = (await app.get_me()).username
 
         default = f"""
 <b><emoji id=5471952986970267163>💎</emoji> Владелец</b>:  `{me}`
-<b><emoji id=6334741148560524533>🆔</emoji> Версия</b>:  {version}
+<b><emoji id=6334741148560524533>🆔</emoji> Версия</b>:  0.0.0
 
 <b><emoji id=5357480765523240961>🧠</emoji> CPU</b>:  `{utils.get_cpu()}%`
 <b>💾 RAM</b>:  `{utils.get_ram()}MB`
