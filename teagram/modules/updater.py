@@ -46,6 +46,8 @@ class UpdateMod(loader.Module):
     async def on_load(self, app: Client):
         if not self.config.get('sendOnUpdate'):
             return
+        
+        return
 
         bot: Bot = self.bot.bot
         me = await app.get_me()
