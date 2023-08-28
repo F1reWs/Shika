@@ -13,9 +13,9 @@ from loguru import logger
 from aiogram import Bot
 from aiogram.utils.exceptions import CantParseEntities, CantInitiateConversation, BotBlocked
 
-@loader.module(name="Updater", author='teagram')
+@loader.module(name="Updater", author='shika')
 class UpdateMod(loader.Module):
-    """🍵 Обновление с гита teagram"""
+    """🍵 Обновление с гита shika"""
     def __init__(self):
         value = self.db.get('Updater', 'sendOnUpdate')
         
@@ -93,11 +93,11 @@ class UpdateMod(loader.Module):
          #       return await utils.answer(message, 'У вас установлена последняя версия ✔')
             
             def restart() -> None:
-                os.execl(sys.executable, sys.executable, "-m", "teagram")
+                os.execl(sys.executable, sys.executable, "-m", "shika")
 
             atexit.register(restart)
             self.db.set(
-                "teagram.loader", "restart", {
+                "shika.loader", "restart", {
                     "msg": f"{message.chat.id}:{message.id}",
                     "start": str(round(time.time())),
                     "type": "update"

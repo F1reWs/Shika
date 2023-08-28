@@ -37,17 +37,17 @@ eval "$SUDOCMD $UPD"
 echo "[INFO] install 4 packages..." > install.log
 echo "[INFO] install packages..."
 eval "$SUDOCMD $PKGINSTALL git openssl python python3-pip"
-echo "[INFO] cloning https://github.com/HotDrify/teagram..." > install.log
+echo "[INFO] cloning https://github.com/HotDrify/shika..." > install.log
 echo "[INFO] cloning repository..."
-eval "git clone https://github.com/HotDrify/teagram"
-eval "cd teagram"
+eval "git clone https://github.com/HotDrify/shika"
+eval "cd shika"
 echo "[INFO] installing requirements.txt.." > install.log
 echo "[INFO] installing libraries..."
 eval "pip3 install -r requirements.txt"
 echo "[INFO] installing requirements-speedup.txt..." > install.log
 echo "[INFO] installing speed libraries..."
 eval "pip3 install -r requirements-speedup.txt"
-echo "[INFO] first start teagram..." > install.log
+echo "[INFO] first start shika..." > install.log
 echo "[INFO] first start..."
 clear
-eval "python3 -m teagram"
+eval "python3 -m shika"

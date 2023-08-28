@@ -4,7 +4,7 @@ from ..types import Config, ConfigValue
 
 import os
 
-@loader.module(name="ModuleGuard", author='teagram')
+@loader.module(name="ModuleGuard", author='shika')
 class ModuleGuardMod(loader.Module):
     """moduleGuard оповестит вас о вредоносном модуле."""
     def __init__(self):
@@ -48,13 +48,13 @@ class ModuleGuardMod(loader.Module):
             critical = []
             warns = []
             info = []
-            file_list = os.listdir("teagram/modules/")
+            file_list = os.listdir("shika/modules/")
 
             for file_name in file_list:
                 if file_name in basic_plugins:
                     continue
                 else:
-                    file_path = os.path.join("teagram/modules/", file_name)
+                    file_path = os.path.join("shika/modules/", file_name)
                     if os.path.isfile(file_path):
                         with open(file_path, "r") as file:
                             try:

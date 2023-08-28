@@ -1,3 +1,3 @@
 @echo off
-python -m teagram
+python -m shika
 pause

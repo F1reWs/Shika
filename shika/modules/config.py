@@ -29,7 +29,7 @@ def strtobool(val):
     else:
         raise ValueError("invalid truth value %r" % (val,))
 
-@loader.module(name="config", author="teagram", version=1)
+@loader.module(name="config", author="shika", version=1)
 class ConfigMod(loader.Module):
     """Настройка модулей"""
 

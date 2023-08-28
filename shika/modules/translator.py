@@ -5,7 +5,7 @@ from pyrogram import types
 from googletrans import Translator, LANGUAGES
 from googletrans.models import Translated
 
-@loader.module('Translator', 'teagram')
+@loader.module('Translator', 'shika')
 class TranslatorMod(loader.Module):
     """Переводчик"""
     

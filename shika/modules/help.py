@@ -3,9 +3,9 @@ from pyrogram import Client, types
 from .. import __version__, loader, utils
 
 
-@loader.module(name="Help", author='teagram', tag='system')
+@loader.module(name="Help", author='shika', tag='system')
 class HelpMod(loader.Module):
-    """Помощь по командам 🍵 teagram"""
+    """Помощь по командам 🍵 shika"""
     async def help_cmd(self, app: Client, message: types.Message, args: str):
         """Список всех модулей"""
         self.bot_username = (await self.bot.bot.get_me()).username
@@ -47,7 +47,7 @@ class HelpMod(loader.Module):
             return await utils.answer(
                 message, "<b><emoji id=5465665476971471368>❌</emoji> Такого модуля нет</b>")
 
-        prefix = self.db.get("teagram.loader", "prefixes", ["."])[0]
+        prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
 
         command_descriptions = "\n".join(
             f"👉 <code>{prefix + command}</code>\n"

@@ -71,7 +71,7 @@ class TokenManager(Item):
             await conv.ask("@" + bot_username)
             await conv.get_response()
 
-            await conv.ask("teagram-команда")
+            await conv.ask("shika-команда")
             await conv.get_response()
 
             logger.success("Бот успешно создан")

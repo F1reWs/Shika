@@ -29,7 +29,7 @@ def save_db(
         with open('./config.json', 'w') as file:
             json.dump(data, file, indent=4)
     except Exception:
-        with open('./teagram/config.json', 'w') as file:
+        with open('./shika/config.json', 'w') as file:
             json.dump(data, file, indent=4)
 
 
@@ -40,7 +40,7 @@ def load_db():
         dict: The loaded database data.
     """
     try:
-        with open('./teagram/config.json', 'r') as file:
+        with open('./shika/config.json', 'r') as file:
             data = file.read()
     except Exception:
         with open('./config.json', 'r') as file:

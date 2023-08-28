@@ -23,7 +23,7 @@ handler = CustomStreamHandler()
 log = logging.getLogger()
 log.addHandler(handler)
 
-@loader.module(name="Tester", author="teagram")
+@loader.module(name="Tester", author="shika")
 class TesterMod(loader.Module):
     """Тест чего-то"""
 
@@ -48,11 +48,11 @@ class TesterMod(loader.Module):
                 message, f"❕ Нет логов на уровне {lvl} ({logging.getLevelName(lvl)})")
 
         logs = io.BytesIO(logs)
-        logs.name = "teagram.log"
+        logs.name = "shika.log"
 
         return await message.reply_document(
             document=logs,
-            caption=f"📤 Teagram Логи с {lvl} ({logging.getLevelName(lvl)}) уровнем"
+            caption=f"📤 shika Логи с {lvl} ({logging.getLevelName(lvl)}) уровнем"
             )
     
     async def setprefix_cmd(self, app: Client, message: types.Message, args: str):
@@ -61,7 +61,7 @@ class TesterMod(loader.Module):
             return await utils.answer(
                 message, "❔ На какой префикс нужно изменить?")
 
-        self.db.set("teagram.loader", "prefixes", list(set(args)))
+        self.db.set("shika.loader", "prefixes", list(set(args)))
         prefixes = ", ".join(f"<code>{prefix}</code>" for prefix in args)
         return await utils.answer(
             message, f"✅ Префикс был изменен на {prefixes}")
@@ -71,7 +71,7 @@ class TesterMod(loader.Module):
         args = args.split()
         
         language = args[0]
-        languages = list(map(lambda x: x.replace('.yml', ''), os.listdir('teagram/langpacks')))
+        languages = list(map(lambda x: x.replace('.yml', ''), os.listdir('shika/langpacks')))
         
         if not args:
             return await utils.answer(
@@ -82,7 +82,7 @@ class TesterMod(loader.Module):
             return await utils.answer(
                 message, f'❌ Язык не найден. Доступные языки: <code>{langs}</code>')
 
-        self.db.set("teagram.loader", "lang", language)
+        self.db.set("shika.loader", "lang", language)
         return await utils.answer(
             message, f"✅ Язык был изменен на {language}")
 
@@ -108,7 +108,7 @@ class TesterMod(loader.Module):
                 message, "❌ Такой команды нет")
 
         aliases[args[0]] = args[1]
-        self.db.set("teagram.loader", "aliases", aliases)
+        self.db.set("shika.loader", "aliases", aliases)
 
         return await utils.answer(
             message, f"✅ Алиас <code>{args[0]}</code> для команды <code>{args[1]}</code> был добавлен")
@@ -125,7 +125,7 @@ class TesterMod(loader.Module):
                 message, "❌ Такого алиаса нет")
 
         del aliases[args]
-        self.db.set("teagram.loader", "aliases", aliases)
+        self.db.set("shika.loader", "aliases", aliases)
 
         return await utils.answer(
             message, f"✅ Алиас <code>{args}</code> был удален")

@@ -72,9 +72,9 @@ venv.bak/
 dmypy.json
 .pyre/
 
-# Teagram specific
+# shika specific
 config.ini
 db.json
-teagram.session
-teagram.session-journal
+shika.session
+shika.session-journal
 *.png

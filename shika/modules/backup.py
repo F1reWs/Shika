@@ -35,7 +35,7 @@ def create_backup(src: str, dest: str):
     except Exception as error:
         return [str(error), False, zipp] 
 
-@loader.module(name="Backuper", author='teagram')
+@loader.module(name="Backuper", author='shika')
 class BackupMod(loader.Module):
     """С помощью этого модуля вы сможете делать бекапы модов и всего ЮБ"""
     async def backupub_cmd(self, app: Client, message: types.Message):
@@ -67,7 +67,7 @@ class BackupMod(loader.Module):
             '👀 Попытка бекапа...'
         )
 
-        backup = await create_backup('./teagram/modules/', '')
+        backup = await create_backup('./shika/modules/', '')
 
         if backup[1]:
             return await utils.answer(

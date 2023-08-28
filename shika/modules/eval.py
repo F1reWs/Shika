@@ -29,7 +29,7 @@ async def execute_python_code(code, env={}):
     except Exception as error:
         return error
 
-@loader.module(name="Eval", author='teagram')
+@loader.module(name="Eval", author='shika')
 class EvalMod(loader.Module):
     """Eval"""
 

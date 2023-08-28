@@ -28,7 +28,7 @@ def get_full_command(message: Message) -> Union[
             Сообщение
     """
     message.text = str(message.text or message.caption)
-    prefixes = database.db.get("teagram.loader", "prefixes", ["."])
+    prefixes = database.db.get("shika.loader", "prefixes", ["."])
 
     for prefix in prefixes:
         if (
@@ -297,12 +297,12 @@ def random_id(size: int = 10) -> str:
 
 
 def get_langpack() -> Union[Any, List]:
-    if not (lang := database.db.get('teagram.loader', 'lang')):
-        database.db.set('teagram.loader', 'lang', 'en')
+    if not (lang := database.db.get('shika.loader', 'lang')):
+        database.db.set('shika.loader', 'lang', 'en')
 
         get_langpack()
     else:
-        with open(f'teagram/langpacks/{lang}.yml') as file:
+        with open(f'shika/langpacks/{lang}.yml') as file:
             pack = yaml.safe_load(file)
 
         return pack

@@ -231,7 +231,7 @@ class ModulesManager:
         self.inline_handlers: Dict[str, FunctionType] = {}
         self.callback_handlers: Dict[str, FunctionType] = {}
 
-        self._local_modules_path: str = "./teagram/modules"
+        self._local_modules_path: str = "./shika/modules"
 
         self._app = app
         self._db = db
@@ -256,7 +256,7 @@ class ModulesManager:
             lambda file_name: file_name.endswith(".py")
                 and not file_name.startswith("_"), os.listdir(self._local_modules_path)
         ):
-            module_name = f"teagram.modules.{local_module[:-3]}"
+            module_name = f"shika.modules.{local_module[:-3]}"
             file_path = os.path.join(
                 os.path.abspath("."), self._local_modules_path, local_module
             )
@@ -330,7 +330,7 @@ class ModulesManager:
 
     async def load_module(self, module_source: str, origin: str = "<string>", did_requirements: bool = False) -> str:
         """Загружает сторонний модуль"""
-        module_name = "teagram.modules." + (
+        module_name = "shika.modules." + (
             "".join(random.choice(string.ascii_letters + string.digits)
                     for _ in range(10))
         )
@@ -411,7 +411,7 @@ class ModulesManager:
 
             if (get_module := inspect.getmodule(module)).__spec__.origin != "<string>":
                 set_modules = set(self._db.get(__name__, "modules", []))
-                self._db.set("teagram.loader", "modules",
+                self._db.set("shika.loader", "modules",
                             list(set_modules - {get_module.__spec__.origin}))
 
             for alias, command in self.aliases.copy().items():

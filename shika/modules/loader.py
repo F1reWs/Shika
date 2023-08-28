@@ -49,15 +49,15 @@ async def get_git_raw_link(repo_url: str):
     return f"https://raw.githubusercontent.com{repo_path}/{branch}{path or ''}/"
 
 
-@loader.module(name="Loader", author='teagram')
+@loader.module(name="Loader", author='shika')
 class LoaderMod(loader.Module):
     """Загрузчик модулей"""
 
     async def dlmod_cmd(self, app: Client, message: types.Message, args: str):
         """Загрузить модуль по ссылке. Использование: dlmod <ссылка или all или ничего>"""
         modules_repo = self.db.get(
-            "teagram.loader", "repo",
-            "https://github.com/CodWize/teagram-modules"
+            "shika.loader", "repo",
+            "https://github.com/CodWize/shika-modules"
         )
         api_result = await get_git_raw_link(modules_repo)
         if not api_result:
@@ -104,8 +104,8 @@ class LoaderMod(loader.Module):
                 if not (module_name := await self.all_modules.load_module(r.text, r.url)):
                     continue
 
-                self.db.set("teagram.loader", "modules",
-                            list(set(self.db.get("teagram.loader", "modules", []) + [module])))
+                self.db.set("shika.loader", "modules",
+                            list(set(self.db.get("shika.loader", "modules", []) + [module])))
                 count += 1
         else:
             if args in modules:
@@ -132,8 +132,8 @@ class LoaderMod(loader.Module):
             if error_text:
                 return await utils.answer(message, error_text)
 
-            self.db.set("teagram.loader", "modules",
-                        list(set(self.db.get("teagram.loader", "modules", []) + [args])))
+            self.db.set("shika.loader", "modules",
+                        list(set(self.db.get("shika.loader", "modules", []) + [args])))
 
         return await utils.answer(
             message, (
@@ -196,7 +196,7 @@ class LoaderMod(loader.Module):
                 message, "❌ Не удалось загрузить модуль. Подробности смотри в логах")
         
         module = '_'.join(module_name.lower().split())
-        with open(f'teagram/modules/{module}.py', 'w', encoding="utf-8") as file:
+        with open(f'shika/modules/{module}.py', 'w', encoding="utf-8") as file:
             file.write(module_source)
         
         return await utils.answer(
@@ -255,14 +255,14 @@ class LoaderMod(loader.Module):
                         "❌ Нельзя перезагружать встроенные модули"
                     )
 
-            if module + '.py' not in os.listdir('teagram/modules'):
+            if module + '.py' not in os.listdir('shika/modules'):
                 return await utils.answer(
                     message,
                     f'❌ Модуль {module} не найден'
                 )
             
             unload = self.all_modules.unload_module(module)
-            with open('teagram/modules/' + module + '.py', 'r', encoding='utf-8') as file:
+            with open('shika/modules/' + module + '.py', 'r', encoding='utf-8') as file:
                 module_source = file.read()
 
             load = await self.all_modules.load_module(module_source)
@@ -287,11 +287,11 @@ class LoaderMod(loader.Module):
         """Перезагрузка юзербота"""
         def restart() -> None:
             """Запускает загрузку юзербота"""
-            os.execl(sys.executable, sys.executable, "-m", "teagram")
+            os.execl(sys.executable, sys.executable, "-m", "shika")
 
         atexit.register(restart)
         self.db.set(
-            "teagram.loader", "restart", {
+            "shika.loader", "restart", {
                 "msg": f"{message.chat.id}:{message.id}",
                 "start": time.time(),
                 "type": "restart"
@@ -312,8 +312,8 @@ class LoaderMod(loader.Module):
 
         if args == "reset":
             self.db.set(
-                "teagram.loader", "repo",
-                "https://github.com/CodWize/teagram-modules"
+                "shika.loader", "repo",
+                "https://github.com/CodWize/shika-modules"
             )
             return await utils.answer(
                 message, "✅ Ссылка на репозиторий была сброшена")
@@ -322,6 +322,6 @@ class LoaderMod(loader.Module):
             return await utils.answer(
                 message, "❌ Ссылка указана неверно")
 
-        self.db.set("teagram.loader", "repo", args)
+        self.db.set("shika.loader", "repo", args)
         return await utils.answer(
             message, "✅ Ссылка на репозиторий установлена")

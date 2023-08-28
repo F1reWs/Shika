@@ -39,7 +39,7 @@ def colored_input(prompt: str = "", hide: bool = False) -> str:
 class Auth:
     """Авторизация в аккаунт"""
 
-    def __init__(self, session_name: str = "../teagram") -> None:
+    def __init__(self, session_name: str = "../shika") -> None:
         self._check_api_tokens()
 
         config = configparser.ConfigParser()

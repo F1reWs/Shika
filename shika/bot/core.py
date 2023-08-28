@@ -42,7 +42,7 @@ class BotManager(
         self._db = db
         self._all_modules = all_modules
 
-        self._token = self._db.get("teagram.bot", "token", None)
+        self._token = self._db.get("shika.bot", "token", None)
 
     async def load(self) -> Union[bool, NoReturn]:
         """Загружает менеджер бота"""
@@ -59,7 +59,7 @@ class BotManager(
                 logging.error(error_text)
                 return sys.exit(1)
 
-            self._db.set("teagram.bot", "token", self._token)
+            self._db.set("shika.bot", "token", self._token)
 
         try:
             self.bot = Bot(self._token, parse_mode="html")
@@ -74,11 +74,11 @@ class BotManager(
                     logging.error(error_text)
                     return sys.exit(1)
 
-                self._db.set("teagram.bot", "token", self._token)
+                self._db.set("shika.bot", "token", self._token)
                 return await self.load()
             else:
                 self._token = result
-                self._db.set("teagram.bot", "token", self._token)
+                self._db.set("shika.bot", "token", self._token)
 
                 return await self.load()
 

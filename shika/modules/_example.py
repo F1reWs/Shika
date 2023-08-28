@@ -7,14 +7,14 @@ from aiogram.types import (CallbackQuery, InlineKeyboardButton,
                             Message)
 from pyrogram import Client, types
 
-from .. import (  # ".." - т.к. модули находятся в папке teagram/modules, то нам нужно на уровень выше
+from .. import (  # ".." - т.к. модули находятся в папке shika/modules, то нам нужно на уровень выше
     loader, utils, validators)
 from ..types import Config, ConfigValue
 
-                            # loader, modules, bot - файлы из папки teagram
+                            # loader, modules, bot - файлы из папки shika
 
 
-@loader.module(name="Example", author="teagram", version=1)  # name модуля ("name" обязательный аргумент, остальное — нет), author - автор, version - версия
+@loader.module(name="Example", author="shika", version=1)  # name модуля ("name" обязательный аргумент, остальное — нет), author - автор, version - версия
 class ExampleMod(loader.Module):  # Example - название класса модуля
                                 # Mod в конце названия обязательно
     """Описание модуля"""

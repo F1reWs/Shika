@@ -17,10 +17,10 @@ async def main():
     modules = loader.ModulesManager(app, db, me)
     await modules.load(app)
 
-    prefix = db.get("teagram.loader", "prefixes", ["."])[0]
+    prefix = db.get("shika.loader", "prefixes", ["."])[0]
     print('Юзербот включен (Префикс - "{}")'.format(prefix))
 
-    if (restart := db.get("teagram.loader", "restart")):
+    if (restart := db.get("shika.loader", "restart")):
         restarted_text = (
             f"✅ Перезагрузка прошла успешно! ({round(time.time())-int(restart['start'])} сек.)"
             if restart["type"] == "restart"
@@ -39,7 +39,7 @@ async def main():
         except:
             print(restarted_text)
 
-        db.pop("teagram.loader", "restart")
+        db.pop("shika.loader", "restart")
 
     await idle()
 
