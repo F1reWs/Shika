@@ -17,10 +17,10 @@ class AboutMod(loader.Module):
             ConfigValue(
                 'customText',
                 '',
-                self.db.get('UserBot', 'customText') or '',
-                validators.String()
-            ) # type: ignore
+                self.db.get('UserBot', 'customText') or ''
+            )  # No need to specify validators.String() here
         )
+
     
     async def info_cmd(self, app: Client, message: types.Message):
         """Информация о вашем 🍵teagram."""
