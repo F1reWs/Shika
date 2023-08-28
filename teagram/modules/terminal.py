@@ -17,11 +17,10 @@ def bash_exec(args: str):
         return error
 
 
-@loader.module(name="Terminal", author='teagram')
+@loader.module(name="Terminal", author='F1reW')
 class TerminalMod(loader.Module):
-    """Используйте терминал BASH прямо через 🍵teagram!"""
+    """Терминал"""
     async def terminal_cmd(self, app: Client, message: types.Message, args: str):
-        await utils.answer(message, "☕")
         output = await bash_exec(args)
 
         await utils.answer(
