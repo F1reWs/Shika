@@ -29,19 +29,20 @@ class AboutMod(loader.Module):
         uptime_raw = round(time.time() - self.boot_time)
         uptime = (timedelta(seconds=uptime_raw))
 
-        me = (await app.get_me()).username
+        me = (await app.get_me()).first_name
 
         version = "0.0.0"
 
         default = f"""
-<b><emoji id=5471952986970267163>💎</emoji> Владелец</b>:  `{me}`
-<b><emoji id=6334741148560524533>🆔</emoji> Версия</b>:  `{version}`
+<b>🌀 Shika</b>
 
-<b><emoji id=5357480765523240961>🧠</emoji> CPU</b>:  `{utils.get_cpu()}%`
+<b><emoji id=5445284980978621387>🚀</emoji> Владелец</b>: `{me}`
+
+<b><emoji id=5971818172985117571>💻</emoji> Версия</b>:  `{version}`
+<b><emoji id=5451732530048802485>⏳</emoji> Аптайм</b>:  `{uptime}`
+
+<b><emoji id=5431449001532594346>⚡️</emoji> CPU</b>:  `{utils.get_cpu()}%`
 <b>💾 RAM</b>:  `{utils.get_ram()}MB`
-
-<b><emoji id=5974081491901091242>🕒</emoji> UpTime</b>:  `{uptime}`
-<b><emoji id=5377399247589088543>🔥</emoji> Версия pyrogram: `{pyrogram.__version__}`</b>
 
 <b>{platform}</b>
 """
