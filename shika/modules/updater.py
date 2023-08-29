@@ -70,18 +70,8 @@ class UpdateMod(loader.Module):
                 
         except CantInitiateConversation:
             logger.error(f'Updater | Вы заблокировали ботом, пожалуйста разблокируйте бота ({_me.username})')
-            await bot.send_message(
-                me.id,
-                '<b><emoji id=5019523782004441717>❌</emoji> Произошла ошибка, при проверке доступного обновления.</b>\n'
-                f'<b><emoji id=5019523782004441717>❌</emoji> Вы заблокировали ботом, пожалуйста разблокируйте бота ({_me.username})</b>'
-            )
         except BotBlocked:
             logger.error(f'Updater | Вы не начали диалог с ботом, пожалуйста напишите боту /start ({_me.username})')
-            await bot.send_message(
-                me.id,
-                '<b><emoji id=5019523782004441717>❌</emoji> Произошла ошибка, при проверке доступного обновления.</b>\n'
-                f'<b><emoji id=5019523782004441717>❌</emoji> Вы не начали диалог с ботом, пожалуйста напишите боту /start ({_me.username})</b>'
-            )
 
         except CantParseEntities:
             await bot.send_message(
@@ -95,13 +85,8 @@ class UpdateMod(loader.Module):
         except Exception as error:
             await bot.send_message(
                 me.id,
-<<<<<<< HEAD
-                '<emoji id=5019523782004441717>❌</emoji> <b>Произошла ошибка, при проверке доступного обновления.</b>\n'
-                f'<b>Пожалуйста, удостовертесь что у вас работает команда GIT {error}</b>'
-=======
-                '<b><emoji id=5019523782004441717>❌</emoji> Произошла ошибка, при проверке доступного обновления.</b>\n'
-                f'<b><emoji id=5019523782004441717>❌</emoji> Пожалуйста, удостовертесь что у вас работает команда GIT {error}</b>'
->>>>>>> 19a4508773e69ee22db26881676c910f260ae55a
+                '<b>❌ Произошла ошибка, при проверке доступного обновления.</b>\n',
+                f'<b>❌ Пожалуйста, удостовертесь что у вас работает команда GIT {error}</b>'
             )
 
     async def update_cmd(self, app: Client, message: types.Message):
