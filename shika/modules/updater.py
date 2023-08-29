@@ -12,10 +12,10 @@ from loguru import logger
 
 from aiogram import Bot
 from aiogram.utils.exceptions import CantParseEntities, CantInitiateConversation, BotBlocked
-#1
-@loader.module(name="Updater", author='shika')
+
+@loader.module(name="Updater", author='Shika')
 class UpdateMod(loader.Module):
-    """🍵 Обновление с гита shika"""
+    """Обновление Shika"""
     def __init__(self):
         value = self.db.get('Updater', 'sendOnUpdate')
         
@@ -50,6 +50,7 @@ class UpdateMod(loader.Module):
         bot: Bot = self.bot.bot
         me = await app.get_me()
         _me = await bot.get_me()
+        prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
 
         last = None
 
@@ -62,6 +63,8 @@ class UpdateMod(loader.Module):
                     me.id,
                     f"""<b>
 🔍 Доступно обновление Shika (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)
+
+🌀 Пропиши команду <code>{prefix}update</code> что бы обновится
 </b>""", disable_web_page_preview=True
                 )
                 
