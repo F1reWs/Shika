@@ -85,14 +85,18 @@ class UpdateMod(loader.Module):
 
         except CantParseEntities:
             await bot.send_message(
-                me.id,
-                f"✔ Доступно обновление (https://github.com/F1reWs/Shika/commit/{last})"
-            )
+                    me.id,
+                    f"""<b>
+🔍 Доступно обновление Shika (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)
+
+🌀 Пропиши команду <code>{prefix}update</code> что бы обновится
+</b>""", disable_web_page_preview=True
+                )
         except Exception as error:
             await bot.send_message(
                 me.id,
-                '❌ Произошла ошибка, при проверке доступного обновления.\n'
-                f'❌ Пожалуйста, удостовертесь что у вас работает команда GIT {error}'
+                '<b><emoji id=5019523782004441717>❌</emoji> Произошла ошибка, при проверке доступного обновления.</b>\n'
+                f'<b><emoji id=5019523782004441717>❌</emoji> Пожалуйста, удостовертесь что у вас работает команда GIT {error}</b>'
             )
 
     async def update_cmd(self, app: Client, message: types.Message):
