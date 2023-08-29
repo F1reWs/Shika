@@ -60,7 +60,9 @@ class UpdateMod(loader.Module):
             if diff:
                 await bot.send_message(
                     me.id,
-                    f"✔ Доступно обновление (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)"
+                    f"""<b>
+🔍 Доступно обновление Shika (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)
+</b>""", disable_web_page_preview=True
                 )
                 
         except CantInitiateConversation:
