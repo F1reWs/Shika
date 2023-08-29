@@ -82,13 +82,13 @@ class UpdateMod(loader.Module):
 
     async def update_cmd(self, app: Client, message: types.Message):
         try:
-            await utils.answer(message, 'Попытка обновления...')
+            await utils.answer(message, '<b><emoji id=5328274090262275771>🕐</emoji> Скачивание обновлений...</b>')
 
             check_output('git stash', shell=True).decode()
             output = check_output('git pull', shell=True).decode()
             
             if 'Already up to date.' in output:
-                return await utils.answer(message, 'У вас установлена последняя версия ✔')
+                return await utils.answer(message, '<b><emoji id=5332533929020761310>✅</emoji> У вас уже установлена последняя версия!</b>')
             
             def restart() -> None:
                 os.execl(sys.executable, sys.executable, "-m", "shika")
@@ -102,7 +102,7 @@ class UpdateMod(loader.Module):
                 }
             )
 
-            await utils.answer(message, "🔁 Обновление...")
+            await utils.answer(message, "<b><emoji id=5328274090262275771>🔁</emoji> Обновление...</b>")
 
             logging.info("Обновление...")
             return sys.exit(0)
