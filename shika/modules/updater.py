@@ -12,7 +12,7 @@ from loguru import logger
 
 from aiogram import Bot
 from aiogram.utils.exceptions import CantParseEntities, CantInitiateConversation, BotBlocked
-
+#1
 @loader.module(name="Updater", author='shika')
 class UpdateMod(loader.Module):
     """🍵 Обновление с гита shika"""
