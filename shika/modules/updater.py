@@ -65,8 +65,18 @@ class UpdateMod(loader.Module):
                 
         except CantInitiateConversation:
             logger.error(f'Updater | Вы заблокировали ботом, пожалуйста разблокируйте бота ({_me.username})')
+            await bot.send_message(
+                me.id,
+                '<b><emoji id=5019523782004441717>❌</emoji> Произошла ошибка, при проверке доступного обновления.</b>\n'
+                f'<b><emoji id=5019523782004441717>❌</emoji> Вы заблокировали ботом, пожалуйста разблокируйте бота ({_me.username})</b>'
+            )
         except BotBlocked:
             logger.error(f'Updater | Вы не начали диалог с ботом, пожалуйста напишите боту /start ({_me.username})')
+            await bot.send_message(
+                me.id,
+                '<b><emoji id=5019523782004441717>❌</emoji> Произошла ошибка, при проверке доступного обновления.</b>\n'
+                f'<b><emoji id=5019523782004441717>❌</emoji> Вы не начали диалог с ботом, пожалуйста напишите боту /start ({_me.username})</b>'
+            )
 
         except CantParseEntities:
             await bot.send_message(
