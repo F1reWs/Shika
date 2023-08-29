@@ -64,9 +64,21 @@ class AboutMod(loader.Module):
             message,
             custom or text
         )
-        
+
     async def shika_cmd(self, app: Client, message: types.Message, args: str):
-        """Информация о UserBot"""
+        """Информация о Shika"""
+        await utils.answer(message, f'''<b>
+🌀 Shika {__version__}
+
+</b><i>The best userbot.</i>
+
+<b><emoji id=5377399247589088543>🔥</emoji> Версия pyrogram: `{pyrogram.__version__}`
+
+<emoji id=5361735750968679136>🖥</emoji> Developers: t.me/F1reW & t.me/dev_codwiz</b>
+''', disable_preview=True)
+        
+    async def userbot_cmd(self, app: Client, message: types.Message, args: str):
+        """Что такое юзербот"""
         await utils.answer(message, '''
 <emoji id=5467741625507651028>🤔</emoji> <b>Что такое юзербот?</b>
 

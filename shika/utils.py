@@ -50,6 +50,7 @@ async def answer(
     chat_id: Union[str, int] = None,
     doc: bool = False,
     photo: bool = False,
+    disable_preview: bool = False,
     **kwargs
 ) -> List[Message]:
     """В основном это обычный message.edit, но:
@@ -87,41 +88,41 @@ async def answer(
         if chat_id:
             messages.append(
                 await message._client.send_message(
-                    chat_id, outputs[0], **kwargs)
+                    chat_id, outputs[0], **kwargs, disable_web_page_preview=disable_preview)
             )
         else:
             messages.append(
                 await (
                     message.edit if message.outgoing
                     else message.reply
-                )(outputs[0], **kwargs)
+                )(outputs[0], **kwargs, disable_web_page_preview=disable_preview)
             )
 
         for output in outputs[1:]:
             messages.append(
-                await messages[0].reply(output, **kwargs)
+                await messages[0].reply(output, **kwargs, disable_web_page_preview=disable_preview)
             )
 
     elif doc:
         if chat_id:
             messages.append(
                 await message._client.send_document(
-                    chat_id, response, **kwargs)
+                    chat_id, response, **kwargs, disable_web_page_preview=disable_preview)
             )
         else:
             messages.append(
-                await message.reply_document(response, **kwargs)
+                await message.reply_document(response, **kwargs, disable_web_page_preview=disable_preview)
             )
 
     elif photo:
         if chat_id:
             messages.append(
                 await message._client.send_photo(
-                    chat_id, response, **kwargs)
+                    chat_id, response, **kwargs, disable_web_page_preview=disable_preview)
             )
         else:
             messages.append(
-                await message.reply_photo(response, **kwargs)
+                await message.reply_photo(response, **kwargs, disable_web_page_preview=disable_preview)
             )
 
     return messages
