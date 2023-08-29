@@ -60,9 +60,9 @@ async def main():
 
     if (restart := db.get("shika.loader", "restart")):
         restarted_text = (
-            f"✅ Перезагрузка прошла успешно! ({round(time.time())-int(restart['start'])} сек.)"
+            f"<b><emoji id=6334758581832779720>✅</emoji> Shika полностью перезагружена! ({round(time.time())-int(restart['start'])} сек.)</b>"
             if restart["type"] == "restart"
-            else f"✅ Обновление прошло успешно! ({round(time.time())-int(restart['start'])} сек.)"
+            else f"<b><emoji id=6334758581832779720>✅</emoji> Shika обновлена до последней версии! ({round(time.time())-int(restart['start'])} сек.)</b>"
         )
         
         try:
