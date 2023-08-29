@@ -13,9 +13,9 @@ from loguru import logger
 from aiogram import Bot
 from aiogram.utils.exceptions import CantParseEntities, CantInitiateConversation, BotBlocked
 
-@loader.module(name="Updater", author='shika')
+@loader.module(name="Updater", author='Shika')
 class UpdateMod(loader.Module):
-    """🍵 Обновление с гита shika"""
+    """Обновление Shika"""
     def __init__(self):
         value = self.db.get('Updater', 'sendOnUpdate')
         
@@ -50,6 +50,7 @@ class UpdateMod(loader.Module):
         bot: Bot = self.bot.bot
         me = await app.get_me()
         _me = await bot.get_me()
+        prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
 
         last = None
 
@@ -60,7 +61,11 @@ class UpdateMod(loader.Module):
             if diff:
                 await bot.send_message(
                     me.id,
-                    f"✔ Доступно обновление (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)"
+                    f"""<b>
+🔍 Доступно обновление Shika (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)
+
+🌀 Пропиши команду <code>{prefix}update</code> что бы обновится
+</b>""", disable_web_page_preview=True
                 )
                 
         except CantInitiateConversation:
@@ -70,25 +75,29 @@ class UpdateMod(loader.Module):
 
         except CantParseEntities:
             await bot.send_message(
-                me.id,
-                f"✔ Доступно обновление (https://github.com/F1reWs/Shika/commit/{last})"
-            )
+                    me.id,
+                    f"""<b>
+🔍 Доступно обновление Shika (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)
+
+🌀 Пропиши команду <code>{prefix}update</code> что бы обновится
+</b>""", disable_web_page_preview=True
+                )
         except Exception as error:
             await bot.send_message(
                 me.id,
-                '❌ Произошла ошибка, при проверке доступного обновления.\n'
-                f'❌ Пожалуйста, удостовертесь что у вас работает команда GIT {error}'
+                '<emoji id=5019523782004441717>❌</emoji> <b>Произошла ошибка, при проверке доступного обновления.</b>\n'
+                f'<b>Пожалуйста, удостовертесь что у вас работает команда GIT {error}</b>'
             )
 
     async def update_cmd(self, app: Client, message: types.Message):
         try:
-            await utils.answer(message, 'Попытка обновления...')
+            await utils.answer(message, '<b><emoji id=5328274090262275771>🕐</emoji> Скачивание обновлений...</b>')
 
             check_output('git stash', shell=True).decode()
             output = check_output('git pull', shell=True).decode()
             
             if 'Already up to date.' in output:
-                return await utils.answer(message, 'У вас установлена последняя версия ✔')
+                return await utils.answer(message, '<b><emoji id=5332533929020761310>✅</emoji> У вас уже установлена последняя версия!</b>')
             
             def restart() -> None:
                 os.execl(sys.executable, sys.executable, "-m", "shika")
@@ -102,7 +111,7 @@ class UpdateMod(loader.Module):
                 }
             )
 
-            await utils.answer(message, "🔁 Обновление...")
+            await utils.answer(message, "<b><emoji id=5328274090262275771>🔁</emoji> Обновление...</b>")
 
             logging.info("Обновление...")
             return sys.exit(0)

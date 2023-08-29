@@ -32,8 +32,8 @@ class TokenManager(Item):
                 phrase not in response.text
                 for phrase in ["That I cannot do.", "Sorry"]
             ):
-                logging.error("Произошла ошибка при создании бота. Ответ @BotFather:")
-                logging.error(response.text)
+                logging.error("Произошла ошибка при создании бота.")
+          #      logging.error(response.text)
 
                 if 'too many attempts' in response.text:
                     seconds = response.text.split()[-2]
@@ -51,8 +51,8 @@ class TokenManager(Item):
 
             search = re.search(r"(?<=<code>)(.*?)(?=</code>)", response.text.html)
             if not search:
-                logging.error("Произошла ошибка при создании бота. Ответ @BotFather:")
-                return logging.error(response.text)
+                logging.error("Произошла ошибка при создании бота.")
+        #        return logging.error(response.text)
 
             token = search.group(0)
             await conv.ask("/setuserpic")

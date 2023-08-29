@@ -50,7 +50,7 @@ class BotManager(
         error_text = "Юзерботу необходим бот. Реши проблему создания бота и запускай юзербот заново"
 
         if not self._token:
-            logging.error("Токен не найден. Попытка пересоздать токен")
+            print("Токен не найден. Пересоздаем токен...")
 
             token = await self._create_bot()
             self._token = token
@@ -64,7 +64,7 @@ class BotManager(
         try:
             self.bot = Bot(self._token, parse_mode="html")
         except (exceptions.ValidationError, exceptions.Unauthorized):
-            logging.error("Неверный токен. Попытка пересоздать токен")
+            print("Токен не рабочий. Пересоздаем токен...")
          
             result = await self._revoke_token()
 

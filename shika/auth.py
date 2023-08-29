@@ -1,3 +1,5 @@
+#shika
+
 import configparser
 import logging
 import sys
@@ -22,6 +24,7 @@ from . import __version__
 
 Session.notice_displayed: bool = True
 
+# shikaaaaaaaaaaaaaaaaaaaaaaa
 
 def colored_input(prompt: str = "", hide: bool = False) -> str:
     """Цветной инпут"""
