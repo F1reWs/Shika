@@ -36,13 +36,13 @@ class AboutMod(loader.Module):
         default = f"""
 <b>🌀 Shika</b>
 
-<b><emoji id=5445284980978621387>🚀</emoji> Владелец</b>: `{me}`
+<b><emoji id=5445284980978621387>🚀</emoji> Владелец:</b> `{me}`
 
-<b><emoji id=5971818172985117571>💻</emoji> Версия</b>:  `{version}`
-<b><emoji id=5451732530048802485>⏳</emoji> Аптайм</b>:  `{uptime}`
+<b><emoji id=5971818172985117571>💻</emoji> Версия:</b> `{version}`
+<b><emoji id=5451732530048802485>⏳</emoji> Аптайм:</b> `{uptime}`
 
-<b><emoji id=5431449001532594346>⚡️</emoji> CPU</b>:  `{utils.get_cpu()}%`
-<b>💾 RAM</b>:  `{utils.get_ram()}MB`
+<b><emoji id=5431449001532594346>⚡️</emoji> CPU:</b> `{utils.get_cpu()}%`
+<b>💾 RAM:</b> `{utils.get_ram()}MB`</b>
 
 <b>{platform}</b>
 """
