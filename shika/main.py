@@ -76,12 +76,12 @@ async def main():
             payload = {
                'chat_id': restart["msg"].split(":")[0],
                'message_id': restart["msg"].split(":")[1],
-               'text': restarted_text
+               'text': restarted_text,
+               'parse_mode': "HTML",
             }
-            response = requests.post(url, json=payload)
-            return
-        
-        try:
+            response = requests.post(url, json=payload)     
+
+        if not restart["type"] == "update_from_bot":
             msg = await app.get_messages(*map(int, restart["msg"].split(":")))
             if (
                 not msg.empty
@@ -90,8 +90,6 @@ async def main():
                 )
             ):
                 await msg.edit(restarted_text)
-        except:
-            print(restarted_text)
 
         db.pop("shika.loader", "restart")
 
