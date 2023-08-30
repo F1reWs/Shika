@@ -11,7 +11,14 @@ from ..types import Config, ConfigValue
 from loguru import logger
 
 from aiogram import Bot
+from aiogram.types import InputFile
 from aiogram.utils.exceptions import CantParseEntities, CantInitiateConversation, BotBlocked
+from aiogram.types import (
+    CallbackQuery, InlineKeyboardButton,
+    InlineKeyboardMarkup, InlineQuery,
+    InlineQueryResultArticle, InputTextMessageContent,
+    Message
+)
 
 @loader.module(name="Updater", author='Shika')
 class UpdateMod(loader.Module):
@@ -52,6 +59,19 @@ class UpdateMod(loader.Module):
         _me = await bot.get_me()
         prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
 
+        keyboard = InlineKeyboardMarkup()
+
+        keyboard.row(
+            InlineKeyboardButton(
+                '🔄 Обновить',
+                callback_data='update_from_bot'
+            ),
+            InlineKeyboardButton(
+                '🚫 Не обновляться',
+                callback_data='not_update_from_bot'
+            ),
+        )
+
         last = None
 
         try:
@@ -59,35 +79,72 @@ class UpdateMod(loader.Module):
             diff = check_output('git diff', shell=True).decode()
 
             if diff:
-                await bot.send_message(
-                    me.id,
-                    f"""<b>
-🔍 Доступно обновление Shika (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)
+             gif_path = './assets/update.mp4'
 
-🌀 Пропиши команду <code>{prefix}update</code> что бы обновится
-</b>""", disable_web_page_preview=True
-                )
-                
+             with open(gif_path, 'rb') as gif_file:
+               await bot.send_video(chat_id=me.id, caption=f"""<b>
+🔍 Доступно обновление Shika (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)
+</b>""", reply_markup=keyboard, video=InputFile(gif_file))
+
         except CantInitiateConversation:
             logger.error(f'Updater | Вы заблокировали ботом, пожалуйста разблокируйте бота ({_me.username})')
         except BotBlocked:
             logger.error(f'Updater | Вы не начали диалог с ботом, пожалуйста напишите боту /start ({_me.username})')
 
         except CantParseEntities:
-            await bot.send_message(
-                    me.id,
-                    f"""<b>
-🔍 Доступно обновление Shika (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)
+            gif_path = './assets/update.mp4'
 
-🌀 Пропиши команду <code>{prefix}update</code> что бы обновится
-</b>""", disable_web_page_preview=True
-                )
+            with open(gif_path, 'rb') as gif_file:
+               await bot.send_video(chat_id=me.id, caption=f"""<b>
+🔍 Доступно обновление Shika (<a href='https://github.com/F1reWs/Shika/commit/{last}'>{last[:6]}...</a>)
+</b>""", reply_markup=keyboard, video=InputFile(gif_file))
         except Exception as error:
             await bot.send_message(
                 me.id,
                 '<b>❌ Произошла ошибка, при проверке доступного обновления.</b>\n',
                 f'<b>❌ Пожалуйста, удостовертесь что у вас работает команда GIT {error}</b>'
             )
+        except:
+            await bot.send_message(
+                me.id,
+                '<b>❌ Произошла ошибка, при проверке доступного обновления.</b>\n',
+            )
+
+    @loader.on_bot(lambda _, __, call: call.data.startswith('update_from_bot'))
+    async def answer_callback_handler(self, app: Client, call: CallbackQuery):
+        if call.from_user.id != (await app.get_me()).id:
+            return await call.answer('Ты не владелец')
+
+        await self.inline_bot.edit_message_text(
+inline_message_id=call.inline_message_id,
+text=f'<b>🕐Скачивание обновлений...</b>',)
+        
+        check_output('git stash', shell=True).decode()
+        output = check_output('git pull', shell=True).decode()
+            
+        if 'Already up to date.' in output:
+            return await self.inline_bot.edit_message_text(
+inline_message_id=call.inline_message_id,
+text=f'<b>✅ У вас уже установлена последняя версия!</b>',)
+        
+        def restart() -> None:
+                os.execl(sys.executable, sys.executable, "-m", "shika")
+
+        atexit.register(restart)
+        self.db.set(
+                "shika.loader", "restart", {
+                    "msg": f"{call.message.chat}:{call.inline_message_id}",
+                    "start": str(round(time.time())),
+                    "type": "update"
+                }
+            )
+
+        await self.inline_bot.edit_message_text(
+inline_message_id=call.inline_message_id,
+text=f'<b>🔄 Обновление...</b>',)
+
+        logging.info("Обновление...")
+        return sys.exit(0)
 
     async def update_cmd(self, app: Client, message: types.Message):
         try:
