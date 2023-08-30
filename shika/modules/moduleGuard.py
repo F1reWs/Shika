@@ -11,16 +11,16 @@ class ModuleGuardMod(loader.Module):
         value = self.db.get('ModuleGuard', 'send')
         
         if value is None:
-            value = True
+            value = 'True'  # Значение должно быть строкой, 'True' или 'False'
 
         self.config = Config(
             ConfigValue(
                 option='send',
                 default=True,
-                value=value,
-                validator=validators.Boolean()
+                value=value == 'True',  # Преобразовываем строку в булево
             ) # type: ignore
         )
+
 
     async def on_load(self, app: types.Message):
         if self.config.get('send'):

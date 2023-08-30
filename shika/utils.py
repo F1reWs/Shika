@@ -296,18 +296,6 @@ def random_id(size: int = 10) -> str:
         for _ in range(size)
     )
 
-
-def get_langpack() -> Union[Any, List]:
-    if not (lang := database.db.get('shika.loader', 'lang')):
-        database.db.set('shika.loader', 'lang', 'en')
-
-        get_langpack()
-    else:
-        with open(f'shika/langpacks/{lang}.yml') as file:
-            pack = yaml.safe_load(file)
-
-        return pack
-
 async def paste_neko(code: str):
     try:
         async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
