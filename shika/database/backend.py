@@ -1,7 +1,7 @@
 import asyncio
 from typing import Union
 
-from pyrogram import Client, types#
+from pyrogram import Client, types
 
 
 class CloudDatabase:
