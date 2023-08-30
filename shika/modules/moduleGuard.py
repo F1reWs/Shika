@@ -75,10 +75,10 @@ class ModuleGuardMod(loader.Module):
                         #         info.append(word["name"])
 
             message_text = """
-<b>ModuleGuard</b>
+<b><emoji id=5197373721987260587>🔒</emoji> ModuleGuard</b>
     """
             basic_text = """
-<b>ModuleGuard</b>
+<b><emoji id=5197373721987260587>🔒</emoji> ModuleGuard</b>
     """
             for file_name in file_list:
                 if not file_name.endswith('.py'):
@@ -92,16 +92,16 @@ class ModuleGuardMod(loader.Module):
                     message_text += f"{file_name}:\n"
 
                     if info_text:
-                        message_text += f"❔ Info ➜ {info_text}\n"
+                        message_text += f"<b>❔ Info ➜ {info_text}</b>\n"
                     if warns_text:
-                        message_text += f"❗ Warns ➜ {warns_text}\n"
+                        message_text += f"<b>❗ Warns ➜ {warns_text}</b>\n"
                     if critical_text:
-                        message_text += f"❌ Criticals ➜ {critical_text}\n"
+                        message_text += f"<b>❌ Criticals ➜ {critical_text}</b>\n"
 
                     if not info and not warns and not critical:
                         message_text += 'Безопасный плагин ✔\n'
             
             if message_text == basic_text:
-                message_text += 'Подозрительных плагинов не найдено'
+                message_text += '<b><emoji id=5332533929020761310>✅</emoji> Подозрительных плагинов не найдено</b>'
 
             await app.send_message("me", message_text)
