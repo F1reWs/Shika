@@ -12,4 +12,4 @@ requests>=2.31.0
 qrcode>=7.4.2
 colorama
 
-# need python>=3.9
+# need # python>=3.9
