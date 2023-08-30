@@ -8,19 +8,6 @@ from pyrogram import Client, types
 from .. import loader, utils
 from ..types import Config, ConfigValue
 
-<<<<<<< HEAD
-=======
-from .. import loader, utils, wrappers
-from loguru import logger
-from time import time
-
-@wrappers.wrap_function_to_async
-def create_backup(src: str, dest: str):
-    name = f'backup_{round(time())}'
-    exceptions = [name, 'backup', 'session', 'db', 'config', 'bot_avatar']
-    
-    zipp = os.path.join(dest, f'{name}.zip')
->>>>>>> 24a3a98478275cfeaf9fd661f2078ec17c679429
 
 @loader.module("Backuper", "shika")
 class BackuperMod(loader.Module):
