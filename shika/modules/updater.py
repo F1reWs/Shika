@@ -24,20 +24,15 @@ from aiogram.types import (
 class UpdateMod(loader.Module):
     """Обновление Shika"""
     def __init__(self):
-        value = self.db.get('Updater', 'sendOnUpdate')
         self.inline_bot = self.bot.bot
-        
-        if value is None:
-            value = True
-        else:
-            value = self._validate_boolean(value)
 
         self.config = Config(
             ConfigValue(
                 option='sendOnUpdate',
+                description='Отправлять ли сообщение что вишло обновление Shika',
                 default=True,
-                value=value
-            )  # type: ignore
+                value=True,
+            )
         )
 
     def _validate_boolean(self, value):
@@ -52,7 +47,7 @@ class UpdateMod(loader.Module):
         return True
 
     async def on_load(self, app: Client):
-        if not self.config.get('sendOnUpdate'):
+        if self.db.get('Updater', 'sendOnUpdate') == False:
             return
 
         bot: Bot = self.bot.bot
@@ -68,7 +63,7 @@ class UpdateMod(loader.Module):
                 callback_data='update_from_bot'
             ),
             InlineKeyboardButton(
-                '🚫 Не обновляться',
+                '🚫 Отмена',
                 callback_data='not_update_from_bot'
             ),
         )
@@ -112,13 +107,13 @@ class UpdateMod(loader.Module):
             )
 
     @loader.on_bot(lambda _, __, call: call.data.startswith('update_from_bot'))
-    async def answer_callback_handler(self, app: Client, call: CallbackQuery):
+    async def update_from_bot_answer_callback_handler(self, app: Client, call: CallbackQuery):
         if call.from_user.id != (await app.get_me()).id:
             return await call.answer('Ты не владелец')
         
         await call.message.delete()
 
-        msg = await call.message.answer(text=f'<b>🕐Скачивание обновлений...</b>',)
+        msg = await call.message.answer(text=f'<b>🕐 Скачивание обновлений...</b>',)
         
         check_output('git stash', shell=True).decode()
         output = check_output('git pull', shell=True).decode()
@@ -135,7 +130,7 @@ text=f'<b>✅ У вас уже установлена последняя вер�
                 "shika.loader", "restart", {
                     "msg": f"{msg.chat.id}:{msg.message_id}",
                     "start": str(round(time.time())),
-                    "type": "update"
+                    "type": "update_from_bot"
                 }
             )
 
@@ -144,6 +139,15 @@ text=f'<b>🔄 Обновление...</b>',)
 
         logging.info("Обновление...")
         return sys.exit(0)
+    
+    @loader.on_bot(lambda _, __, call: call.data.startswith('not_update_from_bot'))
+    async def not_update_from_bot_answer_callback_handler(self, app: Client, call: CallbackQuery):
+        if call.from_user.id != (await app.get_me()).id:
+            return await call.answer('Ты не владелец')
+        
+        await call.message.delete()
+
+        msg = await call.message.answer(text=f'<b>Обновление отменено!</b>',)
 
     async def update_cmd(self, app: Client, message: types.Message):
         try:

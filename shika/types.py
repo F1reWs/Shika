@@ -45,6 +45,7 @@ class WaitForDefault:
 @dataclass
 class ConfigValue:
     option: str 
+    description: str = ""
     default: Any = None
     value: Any = field(default_factory=WaitForDefault)
     validator: Union[Integer, String, Boolean] = None
@@ -66,8 +67,9 @@ class ConfigValue:
         object.__setattr__(self, key, value)
 
 class ConfigValue:
-    def __init__(self, option, value, default):
+    def __init__(self, option, description, value, default):
         self.option = option
+        self.description = description
         self.value = value
         self.default = default
 
@@ -81,6 +83,9 @@ class Config(dict):
 
     def get_default(self, key: str) -> str:
         return self.config[key].default
+    
+    def get_description(self, key: str) -> str:
+        return self.config[key].description
 
     def __getitem__(self, key: str) -> Any:
         try:

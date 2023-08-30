@@ -2,6 +2,7 @@ import logging
 import time
 import os
 from colorama import Fore, Style
+import requests
 
 from pyrogram.methods.utilities.idle import idle
 
@@ -64,8 +65,23 @@ async def main():
             if restart["type"] == "restart"
             else f"<b><emoji id=6334758581832779720>✅</emoji> Shika обновлена до последней версии! ({round(time.time())-int(restart['start'])} сек.)</b>"
         )
-        
-        try:
+
+        if restart["type"] == "update_from_bot":
+            restarted_text = f"<b>✅ Shika обновлена до последней версии! ({round(time.time())-int(restart['start'])} сек.)</b>"
+
+            token = db.get("shika.bot", "token")
+
+            url = f'https://api.telegram.org/bot{token}/editMessageText'
+
+            payload = {
+               'chat_id': restart["msg"].split(":")[0],
+               'message_id': restart["msg"].split(":")[1],
+               'text': restarted_text,
+               'parse_mode': "HTML",
+            }
+            response = requests.post(url, json=payload)     
+
+        if not restart["type"] == "update_from_bot":
             msg = await app.get_messages(*map(int, restart["msg"].split(":")))
             if (
                 not msg.empty
@@ -74,8 +90,6 @@ async def main():
                 )
             ):
                 await msg.edit(restarted_text)
-        except:
-            print(restarted_text)
 
         db.pop("shika.loader", "restart")
 

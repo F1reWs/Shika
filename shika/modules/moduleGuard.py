@@ -8,22 +8,18 @@ import os
 class ModuleGuardMod(loader.Module):
     """moduleGuard оповестит вас о вредоносном модуле."""
     def __init__(self):
-        value = self.db.get('ModuleGuard', 'send')
-        
-        if value is None:
-            value = 'True'  # Значение должно быть строкой, 'True' или 'False'
-
         self.config = Config(
             ConfigValue(
                 option='send',
+                description='Будет ли проверка модулей на вредоносный модуль',
                 default=True,
-                value=value == 'True',  # Преобразовываем строку в булево
-            ) # type: ignore
+                value=True,
+            )
         )
 
 
     async def on_load(self, app: types.Message):
-        if self.config.get('send'):
+        if self.db.get('ModuleGuard', 'send') == True:
             names = {
                 "info": [
                     {"id": "other", "name": "other"},

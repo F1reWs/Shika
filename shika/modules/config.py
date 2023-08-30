@@ -46,6 +46,9 @@ class ConfigMod(loader.Module):
         self.pending = False
         self.pending_id = utils.random_id(50)
         self.pending_module = False
+        self.pending_b = False
+        self.pending_id_b = utils.random_id(50)
+        self.pending_module_b = False
 
     def get_module(self, data: str) -> loader.Module:
         return next((module for module in self.all_modules.modules if module.name.lower() in data.lower()), None)
@@ -179,7 +182,34 @@ reply_markup=keyboard)
 
         self.pending = attribute
         self.pending_module = module
-        self.pending_id = utils.random_id(3)
+        self.pending_id = utils.random_id(7)
+        
+        self.pending_b = attribute
+        self.pending_module_b = module
+        self.pending_id_b = utils.random_id(7)
+
+        standart_arg = self.config.get_default(self.pending)
+        descr = self.config.get_description(self.pending)
+
+        now_data = self.db.get(self.pending_module.name, attribute)
+
+        description = f"ℹ️ {descr}"
+        self.pending_module_description = description
+
+        data_type = type(now_data).__name__
+
+        if data_type == "str":
+            what_data = "текстом"
+        elif data_type == "bool":
+            what_data = "True либо False"
+        elif data_type == "int":
+            what_data = "цифрой"
+        elif data_type == "float":
+            what_data = "цифрой"
+        elif data_type == "list":
+            what_data = "списком"
+        else:
+            what_data = data_type
 
         keyboard = InlineKeyboardMarkup()
 
@@ -204,7 +234,17 @@ reply_markup=keyboard)
         
         await self.inline_bot.edit_message_text(
 inline_message_id=call.inline_message_id,
-text=f'<b>⚙️ Модуль: <code>{self.pending_module.name}</code>\n➡ Атрибут: <code>{attribute}</code></b>',
+text=f'''<b>⚙️ Модуль: <code>{self.pending_module.name}</code>
+➡ Атрибут: <code>{attribute}</code>
+
+</b><i>{description}</i><b>
+
+Стандарт: <code>{standart_arg}</code>
+
+Текущее: <code>{now_data}</code>
+
+📁 Должно быть {what_data}
+</b>''',
 reply_markup=keyboard)
 
     @loader.on_bot(lambda _, __, data: data.data == 'aaa')
@@ -223,7 +263,7 @@ reply_markup=keyboard)
         await self.inline_bot.edit_message_text(
 inline_message_id=call.inline_message_id,
 text=f'''<b>
-☝️ Что бы сменить значение напишите вашему боту (@{self.bot_username}) сообщение <code>{self.pending_id} тут_новое_значение</code>
+☝️ Что бы сменить значение, напишите вашему боту (@{self.bot_username}) сообщение <code>{self.pending_id} тут_новое_значение</code>
 </b>''', 
 reply_markup=keyboard)
         
@@ -243,12 +283,13 @@ reply_markup=keyboard)
         await self.inline_bot.edit_message_text(
 inline_message_id=call.inline_message_id,
 text=f'''<b>
-☝️ Что бы поставить значение по умолчанию напишите вашему боту (@{self.bot_username}) сообщение <code>{self.pending_id}</code>
+☝️ Что бы поставить значение по умолчанию, напишите вашему боту (@{self.bot_username}) сообщение <code>{self.pending_id_b}</code>
 </b>''', 
 reply_markup=keyboard)
 
     @loader.on_bot(lambda self, __, msg: len(self.pending_id) != 50)
     async def change_message_handler(self, app: Client, message: Message):
+      if self.pending_id in message.text:
         if message.from_user.id != (await app.get_me()).id:
             return
         if self.pending_id in message.text:
@@ -265,8 +306,32 @@ reply_markup=keyboard)
             )
 
             self.pending, self.pending_id, self.pending_module = False, utils.random_id(50), False
+            self.pending_b, self.pending_id_b, self.pending_module_b = False, utils.random_id(50), False
 
             message = await message.reply('<b>📝 Значение успешно изменено!</b>')
+
+    
+    @loader.on_bot(lambda self, __, msg: len(self.pending_id_b) != 50)
+    async def b_change_message_handler(self, app: Client, message: Message):
+     if self.pending_id_b in message.text:
+        if message.from_user.id != (await app.get_me()).id:
+            return
+        if self.pending_id in message.text:
+
+            await app.delete_messages(message.chat.id, message.message_id)
+
+            standart_arg = self.config.get_default(self.pending)
+
+            self.config_db.set(
+                self.pending_module.name,
+                self.pending,
+                standart_arg
+            )
+            
+            self.pending, self.pending_id, self.pending_module = False, utils.random_id(50), False
+            self.pending_b, self.pending_id_b, self.pending_module_b = False, utils.random_id(50), False
+
+            message = await message.reply('<b>📝 Значение успешно изменено на стандартное!</b>')
 
     async def cfg_inline_handler(self, app: Client, inline_query: InlineQuery):
         if inline_query.from_user.id == (await app.get_me()).id:

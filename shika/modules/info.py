@@ -15,12 +15,13 @@ class AboutMod(loader.Module):
         self.boot_time = time.time()
         self.config = Config(
             ConfigValue(
-                'customText',
-                '',
-                self.db.get('UserBot', 'customText') or ''
-            )  # No need to specify validators.String() here
+                option='customText',
+                description='Кастомный текст сообщения в info',
+                default='',
+                value='',
+            )
         )
-
+        
     
     async def info_cmd(self, app: Client, message: types.Message):
         """Информация о юзерботе"""
@@ -48,7 +49,7 @@ class AboutMod(loader.Module):
 """
 
         text = default
-        custom = self.config.get('customText')
+        custom = self.db.get('UserBot', 'customText')
 
         if custom:
             custom = custom.format(
