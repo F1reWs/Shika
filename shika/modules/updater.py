@@ -135,7 +135,7 @@ text=f'<b>✅ У вас уже установлена последняя вер�
                 "shika.loader", "restart", {
                     "msg": f"{msg.chat.id}:{msg.message_id}",
                     "start": str(round(time.time())),
-                    "type": "update"
+                    "type": "update_from_bot"
                 }
             )
 
