@@ -79,6 +79,7 @@ async def main():
                'text': restarted_text
             }
             response = requests.post(url, json=payload)
+            print(response.json())
         
         try:
             msg = await app.get_messages(*map(int, restart["msg"].split(":")))
