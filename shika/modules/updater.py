@@ -118,7 +118,7 @@ class UpdateMod(loader.Module):
         
         await call.message.delete()
 
-        msg = await call.message.answer(text=f'<b>🕐Скачивание обновлений...</b>',)
+        msg = await call.message.answer(text=f'<b>🕐 Скачивание обновлений...</b>',)
         
         check_output('git stash', shell=True).decode()
         output = check_output('git pull', shell=True).decode()
