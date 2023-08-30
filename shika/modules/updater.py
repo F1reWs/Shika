@@ -25,6 +25,7 @@ class UpdateMod(loader.Module):
     """Обновление Shika"""
     def __init__(self):
         value = self.db.get('Updater', 'sendOnUpdate')
+        self.inline_bot = self.bot.bot
         
         if value is None:
             value = True
@@ -114,17 +115,16 @@ class UpdateMod(loader.Module):
     async def answer_callback_handler(self, app: Client, call: CallbackQuery):
         if call.from_user.id != (await app.get_me()).id:
             return await call.answer('Ты не владелец')
+        
+        await call.message.delete()
 
-        await self.inline_bot.edit_message_text(
-inline_message_id=call.inline_message_id,
-text=f'<b>🕐Скачивание обновлений...</b>',)
+        msg = await call.message.answer(text=f'<b>🕐Скачивание обновлений...</b>',)
         
         check_output('git stash', shell=True).decode()
         output = check_output('git pull', shell=True).decode()
             
         if 'Already up to date.' in output:
-            return await self.inline_bot.edit_message_text(
-inline_message_id=call.inline_message_id,
+            return await msg.edit_text(
 text=f'<b>✅ У вас уже установлена последняя версия!</b>',)
         
         def restart() -> None:
@@ -133,14 +133,13 @@ text=f'<b>✅ У вас уже установлена последняя вер�
         atexit.register(restart)
         self.db.set(
                 "shika.loader", "restart", {
-                    "msg": f"{call.message.chat}:{call.inline_message_id}",
+                    "msg": f"{msg.chat.id}:{msg.message_id}",
                     "start": str(round(time.time())),
                     "type": "update"
                 }
             )
 
-        await self.inline_bot.edit_message_text(
-inline_message_id=call.inline_message_id,
+        await msg.edit_text(
 text=f'<b>🔄 Обновление...</b>',)
 
         logging.info("Обновление...")
