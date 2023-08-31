@@ -31,6 +31,7 @@ class AboutMod(loader.Module):
         uptime = (timedelta(seconds=uptime_raw))
 
         me = (await app.get_me()).first_name
+        build = utils.get_commit_url()
 
         version = "0.0.0"
 
@@ -39,7 +40,7 @@ class AboutMod(loader.Module):
 
 <b><emoji id=5445284980978621387>🚀</emoji> Владелец:</b> `{me}`
 
-<b><emoji id=5971818172985117571>💻</emoji> Версия:</b> `{version}`
+<b><emoji id=5971818172985117571>💻</emoji> Версия:</b> `{version}` {build}
 <b><emoji id=5451732530048802485>⏳</emoji> Аптайм:</b> `{uptime}`
 
 <b><emoji id=5431449001532594346>⚡️</emoji> CPU:</b> `{utils.get_cpu()}%`
@@ -57,6 +58,7 @@ class AboutMod(loader.Module):
                 cpu=utils.get_cpu(),
                 ram=utils.get_ram(),
                 uptime=uptime,
+                build=utils.get_commit_url(),
                 version=version,
                 platform=platform,
                 pyro=pyrogram.__version__
