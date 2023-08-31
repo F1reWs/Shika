@@ -18,6 +18,7 @@
 import logging
 import asyncio
 
+import io
 import os
 import re
 import sys
