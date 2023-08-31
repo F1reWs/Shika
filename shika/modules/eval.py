@@ -48,10 +48,10 @@ class EvalMod(loader.Module):
         await utils.answer(
             message,
             f"""
-<b>💻 Код</b>:
+<emoji id=5271784000325692980>🐍</emoji><b> Код</b>:
 <pre language="python">{args}</pre>
 
-<b>💻 Вывод</b>:
+<emoji id=6334758581832779720>✅</emoji><b> Вывод</b>:
 <code>{result}</code>
     """
         )
