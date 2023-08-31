@@ -231,7 +231,7 @@ class LoaderMod(loader.Module):
         if module + '.py' not in os.listdir('./shika/modules'):
             mods = self.db.get("shika.loader", "modules")
             for mod in mods:
-                if module in mods:
+                if module in mod:
                     return message.reply_document(document=file, caption=f'''
 <emoji id=5433653135799228968>📁</emoji> Модуль <code>{module}</code>
 
