@@ -176,6 +176,7 @@ class Auth:
             qr = input(f"{Fore.CYAN + Style.BRIGHT}Вход по QRcode? [y/n]{Style.RESET_ALL} ")
 
             if qr[0] == "y":
+                print(f"{Fore.CYAN + Style.BRIGHT}Загрузка QRcode...{Style.RESET_ALL} ")
                 api_id = int(config.get("pyrogram","api_id"))
                 api_hash = config.get("pyrogram","api_hash")
 
