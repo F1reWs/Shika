@@ -46,9 +46,7 @@ class ConfigMod(loader.Module):
         self.pending = False
         self.pending_id = utils.random_id(50)
         self.pending_module = False
-        self.pending_b = False
-        self.pending_id_b = utils.random_id(50)
-        self.pending_module_b = False
+        self.pending_edit = False
 
     def get_module(self, data: str) -> loader.Module:
         return next((module for module in self.all_modules.modules if module.name.lower() in data.lower()), None)
@@ -183,10 +181,6 @@ reply_markup=keyboard)
         self.pending = attribute
         self.pending_module = module
         self.pending_id = utils.random_id(7)
-        
-        self.pending_b = attribute
-        self.pending_module_b = module
-        self.pending_id_b = utils.random_id(7)
 
         standart_arg = self.config.get_default(self.pending)
         descr = self.config.get_description(self.pending)
@@ -208,6 +202,8 @@ reply_markup=keyboard)
             what_data = "цифрой"
         elif data_type == "list":
             what_data = "списком"
+        elif data_type == "NoneType":
+            what_data = "текстом или другим, завысить от того для чего это значение"
         else:
             what_data = data_type
 
@@ -260,6 +256,8 @@ reply_markup=keyboard)
             ),
         )
 
+        self.pending_edit = "new"
+
         await self.inline_bot.edit_message_text(
 inline_message_id=call.inline_message_id,
 text=f'''<b>
@@ -280,10 +278,12 @@ reply_markup=keyboard)
             ),
         )
 
+        self.pending_edit = "standart"
+
         await self.inline_bot.edit_message_text(
 inline_message_id=call.inline_message_id,
 text=f'''<b>
-☝️ Что бы поставить значение по умолчанию, напишите вашему боту (@{self.bot_username}) сообщение <code>{self.pending_id_b}</code>
+☝️ Что бы поставить значение по умолчанию, напишите вашему боту (@{self.bot_username}) сообщение <code>{self.pending_id}</code>
 </b>''', 
 reply_markup=keyboard)
 
@@ -293,9 +293,8 @@ reply_markup=keyboard)
         if message.from_user.id != (await app.get_me()).id:
             return
         if self.pending_id in message.text:
+          if self.pending_edit == "new":
             attr = message.text.replace(self.pending_id, '').strip()
-
-            await app.delete_messages(message.chat.id, message.message_id)
 
             attribute: ConfigValue = self.config[self.pending]
             self.config[self.pending] = self.validate(attr)
@@ -305,21 +304,9 @@ reply_markup=keyboard)
                 self.validate(attr)
             )
 
-            self.pending, self.pending_id, self.pending_module = False, utils.random_id(50), False
-            self.pending_b, self.pending_id_b, self.pending_module_b = False, utils.random_id(50), False
-
             message = await message.reply('<b>📝 Значение успешно изменено!</b>')
 
-    
-    @loader.on_bot(lambda self, __, msg: len(self.pending_id_b) != 50)
-    async def b_change_message_handler(self, app: Client, message: Message):
-     if self.pending_id_b in message.text:
-        if message.from_user.id != (await app.get_me()).id:
-            return
-        if self.pending_id in message.text:
-
-            await app.delete_messages(message.chat.id, message.message_id)
-
+          if self.pending_edit == "standart":
             standart_arg = self.config.get_default(self.pending)
 
             self.config_db.set(
@@ -327,11 +314,12 @@ reply_markup=keyboard)
                 self.pending,
                 standart_arg
             )
-            
-            self.pending, self.pending_id, self.pending_module = False, utils.random_id(50), False
-            self.pending_b, self.pending_id_b, self.pending_module_b = False, utils.random_id(50), False
 
             message = await message.reply('<b>📝 Значение успешно изменено на стандартное!</b>')
+
+          self.pending, self.pending_id, self.pending_module = False, utils.random_id(50), False
+
+          self.pending_edit = False
 
     async def cfg_inline_handler(self, app: Client, inline_query: InlineQuery):
         if inline_query.from_user.id == (await app.get_me()).id:
