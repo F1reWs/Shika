@@ -55,7 +55,7 @@ class ModuleGuardMod(loader.Module):
 
             basic_plugins = ['eval.py', '_example.py', 'help.py', 
                             'info.py', 'loader.py', 'moduleGuard.py',
-                            'terminal.py', 'tester.py', 'translator.py',
+                            'terminal.py', 'tester.py',
                             'updater.py', 'backup.py', 'config.py']
                             
             critical = []
