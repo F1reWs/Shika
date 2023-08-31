@@ -237,13 +237,13 @@ class LoaderMod(loader.Module):
                     response = requests.get(mod)
                     content = response.content
                     file = io.BytesIO(content)
-                    await message.reply_document(file_name=module+".py", document=file, caption=f'''
+                    await message.reply_document(file_name=module+".py", document=file, caption=f'''<b>
 <emoji id=5433653135799228968>📁</emoji> Модуль <code>{module}</code>
 
 <emoji id=5318808961594437445>🌐</emoji> <a href="{mod}">Ссылка</a> на <code>{module}</code>
 
 <emoji id=6334353510582191829>⬇️</emoji> <code>{prefix}dlmod {mod}</code>
-''',
+</b>''',
                 )
                     return await message.delete()
             await utils.answer(
