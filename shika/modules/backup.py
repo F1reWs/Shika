@@ -61,7 +61,7 @@ class BackuperMod(loader.Module):
         
         msg = await message.edit(f"<b><emoji id=5328274090262275771>🕐</emoji> Обновляем базу данных...</b>")
         
-        await client.download_media(message, file_name="./db.json", in_memory=True)
+        await app.download_media(message, file_name="./db.json", in_memory=True)
         
         await msg.edit(f"<b><emoji id=5774134533590880843>🔄</emoji> База данных обновлена!</b>")
 
