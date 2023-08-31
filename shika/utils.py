@@ -45,6 +45,17 @@ def get_full_command(message: Message) -> Union[
 
     return prefixes[0], command.lower(), args[-1] if args else ""
 
+def get_git_hash() -> typing.Union[str, bool]:
+    """
+    Get current Hikka git hash
+    :return: Git commit hash
+    """
+    try:
+        return git.Repo().head.commit.hexsha
+    except Exception:
+        return False
+
+
 async def answer(
     message: Union[Message, List[Message]],
     response: Union[str, Any],
