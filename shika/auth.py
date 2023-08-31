@@ -24,8 +24,6 @@ from . import __version__
 
 Session.notice_displayed: bool = True
 
-# shikaaaaaaaaaaaaaaaaaaaaaaa
-
 def colored_input(prompt: str = "", hide: bool = False) -> str:
     """Цветной инпут"""
     frame = sys._getframe(1)
@@ -49,7 +47,7 @@ class Auth:
         config.read("./config.ini")
 
         self.app = Client(
-            name=session_name, api_id=config.get('pyrogram', 'api_id'),
+            name="Shika", api_id=config.get('pyrogram', 'api_id'),
             api_hash=config.get('pyrogram', 'api_hash'),
             app_version=f"v{__version__}"
         )
