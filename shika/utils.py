@@ -43,6 +43,52 @@ def get_full_command(message: Message) -> Union[
 
     return prefixes[0], command.lower(), args[-1] if args else ""
 
+async def answer_files(
+    message: typing.Union[Message, InlineCall, InlineMessage],
+    file: typing.Union[str, bytes, io.IOBase, InputDocument],
+    caption: typing.Optional[str] = None,
+    **kwargs,
+):
+    """
+    Use this to answer a message with a document
+    :param message: Message to answer
+    :param file: File to send - url, path or bytes
+    :param caption: Caption to send
+    :param kwargs: Extra kwargs to pass to `send_file`
+    :return: Sent message
+
+    :example:
+        >>> await utils.answer_files(message, "test.txt")
+        >>> await utils.answer_files(
+            message,
+            "https://codwiz.ru/test/art.jpg",
+            "This is the cool module, check it out!",
+        )
+    """
+    if isinstance(message, (InlineCall, InlineMessage)):
+        message = message.form["caller"]
+
+    try:
+        response = await app.send_document(
+            chat_id=message.peer_id,
+            document=file,
+            caption=caption,
+            **kwargs,
+        )
+    except Exception:
+        if caption:
+            logger.warning(
+                "Failed to send file, sending plain text instead", exc_info=True
+            )
+            return await answer(message, caption, **kwargs)
+
+        raise
+
+    with contextlib.suppress(Exception):
+        await message.delete()
+
+    return response
+
 
 async def answer(
     message: Union[Message, List[Message]],
