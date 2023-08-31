@@ -20,6 +20,7 @@ import sys
 import time
 import atexit
 import asyncio
+import shutil
 
 from pyrogram import Client, types
 from .. import loader, utils
