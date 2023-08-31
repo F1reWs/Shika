@@ -40,6 +40,7 @@ class EvalMod(loader.Module):
                 'self': self,
                 'client': app,
                 'app': app,
+                'r': message.reply_to_message,
                 'message': message,
                 'args': args
             }
@@ -48,7 +49,7 @@ class EvalMod(loader.Module):
             message,
             f"""
 <b>💻 Код</b>:
-<code>{args}</code>
+<pre language="python">{args}</pre>
 
 <b>💻 Вывод</b>:
 <code>{result}</code>
