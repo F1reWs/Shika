@@ -52,7 +52,7 @@ class HelpMod(loader.Module):
                 if not commands and not inline:
                     pass
                 else:
-                    text += f"\n<b>{module.name}</b> - " + (commands if commands else '`Команд не найдено`') + inline
+                    text += f"\n<b>▪️ {module.name}</b> - " + "(" + (commands if commands else '`Команд не найдено`') + ")" + inline
 
             return await utils.answer(
                 message, 
