@@ -235,6 +235,8 @@ class LoaderMod(loader.Module):
                     return message.reply_document(document=file, caption=f'''
 <emoji id=5433653135799228968>📁</emoji> Модуль <code>{module}</code>
 
+<emoji id=5318808961594437445>🌐</emoji> <a href="{mod}">Ссылка</a> на <code>{module}</code>
+
 <emoji id=6334353510582191829>⬇️</emoji> <code>{prefix}dlmod {mod}</code>
 ''', disable_web_page_preview=True,
                 )
