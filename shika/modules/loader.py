@@ -226,13 +226,17 @@ class LoaderMod(loader.Module):
         if not args:
             return await utils.answer(
             message, "<emoji id=5312526098750252863>❌</emoji> <b>Вы не указали модуль</b>")
-        
+
+        await message.edit(f"<emoji id=5327902038720257153>🔄</emoji><b>Отправляю модуль...</b>")
         module = args.split(maxsplit=1)[0].replace('.py', '')
         if module + '.py' not in os.listdir('./shika/modules'):
             mods = self.db.get("shika.loader", "modules")
             for mod in mods:
                 if module in mod:
-                    return message.reply_document(document=file, caption=f'''
+                    response = requests.get(mod)
+                    content = response.content
+                    file = io.BytesIO(content)
+                    await message.reply_document(document=file, caption=f'''
 <emoji id=5433653135799228968>📁</emoji> Модуль <code>{module}</code>
 
 <emoji id=5318808961594437445>🌐</emoji> <a href="{mod}">Ссылка</a> на <code>{module}</code>
@@ -240,7 +244,8 @@ class LoaderMod(loader.Module):
 <emoji id=6334353510582191829>⬇️</emoji> <code>{prefix}dlmod {mod}</code>
 ''', disable_web_page_preview=True,
                 )
-            return await utils.answer(
+                    return await message.delete()
+            await utils.answer(
                     message,
                     f'<emoji id=5312526098750252863>❌</emoji> <b>Модуль <code>{module}</code> не найден</b>'
                 )
