@@ -318,7 +318,7 @@ def get_git_info() -> typing.Tuple[str, str]:
     hash_ = get_git_hash()
     return (
         hash_,
-        f"https://github.com/F1reWA/Shika/commit/{hash_}" if hash_ else "",
+        f"https://github.com/F1reWs/Shika/commit/{hash_}" if hash_ else "",
     )
 
 def get_commit_url() -> str:
@@ -329,7 +329,7 @@ def get_commit_url() -> str:
     try:
         hash_ = get_git_hash()
         return (
-            f'<a href="https://github.com/F1reWA/Shika/commit/{hash_}">#{hash_[:7]}</a>'
+            f'<a href="https://github.com/F1reWs/Shika/commit/{hash_}">#{hash_[:7]}</a>'
         )
     except Exception:
         return "Unknown"
