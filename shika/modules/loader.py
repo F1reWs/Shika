@@ -229,6 +229,15 @@ class LoaderMod(loader.Module):
         
         module = args.split(maxsplit=1)[0].replace('.py', '')
         if module + '.py' not in os.listdir('./shika/modules'):
+            mods = self.db.get("shika.loader", "modules")
+            for mod in mods:
+                if module in mods:
+                    return message.reply_document(document=file, caption=f'''
+<emoji id=5433653135799228968>📁</emoji> Модуль <code>{module}</code>
+
+<emoji id=6334353510582191829>⬇️</emoji> <code>{prefix}dlmod {mod}</code>
+''', disable_web_page_preview=True,
+                )
             return await utils.answer(
                     message,
                     f'<emoji id=5312526098750252863>❌</emoji> <b>Модуль <code>{module}</code> не найден</b>'
