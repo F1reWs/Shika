@@ -22,10 +22,10 @@ class ExampleMod(loader.Module):  # Example - название класса мо
     def __init__(self):
         self.config = Config(
             ConfigValue(
-                'Это тестовый атрибут',
-                'Дефолтное значение атрибута',
-                'Значение атрибута',
-                validators.String() # тип значения
+                option='Название атрибутива',
+                description='Описание атрибутива',
+                default='Дефолтное значение атрибута',
+                value='Значение атрибута',
             )
         )
 
