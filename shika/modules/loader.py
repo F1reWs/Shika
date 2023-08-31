@@ -246,7 +246,7 @@ class LoaderMod(loader.Module):
 </b>''',
                 )
                     return await message.delete()
-            await utils.answer(
+            return await utils.answer(
                     message,
                     f'<emoji id=5312526098750252863>❌</emoji> <b>Модуль <code>{module}</code> не найден</b>'
                 )
