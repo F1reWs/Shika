@@ -36,8 +36,8 @@ class HelpMod(loader.Module):
                 commands = inline = ""
                 prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
 
-                commands += " <b>|</b> ".join(
-                    f"<code>{command}</code>" for command in module.command_handlers
+                commands += " <b>,</b> ".join(
+                    f"<code>{prefix}{command}</code>" for command in module.command_handlers
                 )
 
                 if module.inline_handlers:
@@ -53,7 +53,7 @@ class HelpMod(loader.Module):
                 if not commands and not inline:
                     pass
                 else:
-                    text += f"\n<b>{module.name}</b> | "  + (prefix + commands if commands else '`Команд не найдено`') + inline
+                    text += f"\n<b>{module.name}</b> | "  + (commands if commands else '`Команд не найдено`') + inline
 
             return await utils.answer(
                 message, 
