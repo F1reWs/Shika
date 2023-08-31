@@ -67,21 +67,21 @@ class BackuperMod(loader.Module):
         
         await msg.edit(f"<b><emoji id=5774134533590880843>🔄</emoji> База данных обновлена!</b>")
 
-    #    def restart() -> None:
-    #            os.execl(sys.executable, sys.executable, "-m", "shika")
+        def restart() -> None:
+                os.execl(sys.executable, sys.executable, "-m", "shika")
 
         m = await message.reply(
 text=f'<b><emoji id=5328274090262275771>🕐</emoji> Перезагрузка...</b>',)
 
-    #    atexit.register(restart)
-     #   self.db.set(
-      #          "shika.loader", "restart", {
-       #             "msg": f"{m.chat.id}:{m.id}",
-        #            "start": str(round(time.time())),
-         #           "type": "restoredb"
-          #      }
-       #     )
-       # return sys.exit(0)
+        atexit.register(restart)
+        self.db.set(
+                "shika.loader", "restart", {
+                    "msg": f"{m.chat.id}:{m.id}",
+                    "start": str(round(time.time())),
+                    "type": "restoredb"
+                }
+            )
+        return sys.exit(0)
         
 
         
