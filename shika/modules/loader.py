@@ -1,3 +1,20 @@
+#     ______   __        _   __              
+#   .' ____ \ [  |      (_) [  |  _          
+#   | (___ \_| | |--.   __   | | / ]  ,--.   
+#    _.____`.  | .-. | [  |  | '' <  `'_\ :  
+#   | \____) | | | | |  | |  | |`\ \ // | |, 
+#    \______.'[___]|__][___][__|  \_]\'-;__/ 
+
+#    Shika (telegram userbot by https://github.com/F1reWs/Shika/graphs/contributors)
+#    Copyright (C) 2023 Shika
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    GNU General Public License https://www.gnu.org/licenses.
+
 import logging
 import asyncio
 
@@ -57,7 +74,7 @@ class LoaderMod(loader.Module):
         """Загрузить модуль по ссылке. Использование: dlmod <ссылка или all или ничего>"""
         modules_repo = self.db.get(
             "shika.loader", "repo",
-            "https://github.com/CodWize/shika-modules"
+            "https://github.com/F1reWs/shika-mods"
         )
         api_result = await get_git_raw_link(modules_repo)
         if not api_result:
@@ -201,6 +218,28 @@ class LoaderMod(loader.Module):
         
         return await utils.answer(
             message, f"✅ Модуль \"<code>{module_name}</code>\" загружен")
+    
+    async def ml_cmd(self, app: Client, message: types.Message, args: str):
+        """Скинуть файл модуля"""
+        app.me = await app.get_me()
+        prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
+        if not args:
+            return await utils.answer(
+            message, "<emoji id=5312526098750252863>❌</emoji> <b>Вы не указали модуль</b>")
+        
+        module = args.split(maxsplit=1)[0].replace('.py', '')
+        if module + '.py' not in os.listdir('./shika/modules'):
+            return await utils.answer(
+                    message,
+                    f'<emoji id=5312526098750252863>❌</emoji> <b>Модуль <code>{module}</code> не найден</b>'
+                )
+        with open('./shika/modules/' + module + '.py', 'rb') as file:
+            await message.reply_document(document=file, caption=f"""<b>
+<emoji id=5433653135799228968>📁</emoji> Модуль <code>{module}</code>
+
+<emoji id=6334353510582191829>⬇️</emoji> Напишите <code>{prefix}loadmod</code> в ответ на это сообщение, что бы установить
+</b>""", file_name=module+".py")
+            await message.delete()
 
     async def unloadmod_cmd(self, app: Client, message: types.Message, args: str):
         """Выгрузить модуль. Использование: unloadmod <название модуля>"""

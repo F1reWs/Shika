@@ -1,3 +1,20 @@
+#     ______   __        _   __              
+#   .' ____ \ [  |      (_) [  |  _          
+#   | (___ \_| | |--.   __   | | / ]  ,--.   
+#    _.____`.  | .-. | [  |  | '' <  `'_\ :  
+#   | \____) | | | | |  | |  | |`\ \ // | |, 
+#    \______.'[___]|__][___][__|  \_]\'-;__/ 
+
+#    Shika (telegram userbot by https://github.com/F1reWs/Shika/graphs/contributors)
+#    Copyright (C) 2023 Shika
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    GNU General Public License https://www.gnu.org/licenses.
+
 import ast
 
 from .. import loader, utils
@@ -39,18 +56,23 @@ class EvalMod(loader.Module):
             {
                 'self': self,
                 'client': app,
+                'c': app,
                 'app': app,
+                "utils": utils,
+                'r': message.reply_to_message,
                 'message': message,
-                'args': args
+                'm': message,
+                'args': args,
+                "db": self.db,
             }
         )
         await utils.answer(
             message,
             f"""
-<b>💻 Код</b>:
-<code>{args}</code>
+<emoji id=5271784000325692980>🐍</emoji><b> Код</b>:
+<pre language="python">{args}</pre>
 
-<b>💻 Вывод</b>:
+<emoji id=6334758581832779720>✅</emoji><b> Вывод</b>:
 <code>{result}</code>
     """
         )

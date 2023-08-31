@@ -1,3 +1,20 @@
+#     ______   __        _   __              
+#   .' ____ \ [  |      (_) [  |  _          
+#   | (___ \_| | |--.   __   | | / ]  ,--.   
+#    _.____`.  | .-. | [  |  | '' <  `'_\ :  
+#   | \____) | | | | |  | |  | |`\ \ // | |, 
+#    \______.'[___]|__][___][__|  \_]\'-;__/ 
+
+#    Shika (telegram userbot by https://github.com/F1reWs/Shika/graphs/contributors)
+#    Copyright (C) 2023 Shika
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    GNU General Public License https://www.gnu.org/licenses.
+
 import pyrogram
 import time
 
@@ -16,7 +33,7 @@ class AboutMod(loader.Module):
         self.config = Config(
             ConfigValue(
                 option='customText',
-                description='Кастомный текст сообщения в info',
+                description='Кастомный текст сообщения в info. Может содержать ключевые слова {owner}, {cpu}, {ram}, {uptime}, {version}, {platform}, {pyro} и также HTML разметку',
                 default='',
                 value='',
             )
@@ -31,6 +48,7 @@ class AboutMod(loader.Module):
         uptime = (timedelta(seconds=uptime_raw))
 
         me = (await app.get_me()).first_name
+        build = utils.get_commit_url()
 
         version = "0.0.0"
 
@@ -39,7 +57,7 @@ class AboutMod(loader.Module):
 
 <b><emoji id=5445284980978621387>🚀</emoji> Владелец:</b> `{me}`
 
-<b><emoji id=5971818172985117571>💻</emoji> Версия:</b> `{version}`
+<b><emoji id=5971818172985117571>💻</emoji> Версия:</b> `{version}` {build}
 <b><emoji id=5451732530048802485>⏳</emoji> Аптайм:</b> `{uptime}`
 
 <b><emoji id=5431449001532594346>⚡️</emoji> CPU:</b> `{utils.get_cpu()}%`
@@ -57,6 +75,7 @@ class AboutMod(loader.Module):
                 cpu=utils.get_cpu(),
                 ram=utils.get_ram(),
                 uptime=uptime,
+                build=utils.get_commit_url(),
                 version=version,
                 platform=platform,
                 pyro=pyrogram.__version__
@@ -93,4 +112,3 @@ class AboutMod(loader.Module):
 <emoji id=5467596412663372909>⁉️</emoji> <b>Поддерживаются ли юзерботы официально Telegram?</b>
 
 <emoji id=5462882007451185227>🚫</emoji> <b>Нет, официально они не поддерживаются</b>. Тем не менее, использование юзерботов не приведет к блокировке вашего аккаунта, если вы не занимаетесь злонамеренной деятельностью или не нарушаете правила Telegram API. Важно следить за тем, чтобы ваши действия с аккаунтом оставались безопасными и законными.''')
-

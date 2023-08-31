@@ -1,4 +1,19 @@
-#shika
+#     ______   __        _   __              
+#   .' ____ \ [  |      (_) [  |  _          
+#   | (___ \_| | |--.   __   | | / ]  ,--.   
+#    _.____`.  | .-. | [  |  | '' <  `'_\ :  
+#   | \____) | | | | |  | |  | |`\ \ // | |, 
+#    \______.'[___]|__][___][__|  \_]\'-;__/ 
+
+#    Shika (telegram userbot by https://github.com/F1reWs/Shika/graphs/contributors)
+#    Copyright (C) 2023 Shika
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    GNU General Public License https://www.gnu.org/licenses.
 
 import configparser
 import logging
@@ -23,8 +38,6 @@ from qrcode.main import QRCode
 from . import __version__
 
 Session.notice_displayed: bool = True
-
-# shikaaaaaaaaaaaaaaaaaaaaaaa
 
 def colored_input(prompt: str = "", hide: bool = False) -> str:
     """Цветной инпут"""
@@ -51,7 +64,9 @@ class Auth:
         self.app = Client(
             name=session_name, api_id=config.get('pyrogram', 'api_id'),
             api_hash=config.get('pyrogram', 'api_hash'),
-            app_version=f"v{__version__}"
+            device_model="Shika",
+            app_version=f"v{__version__}",
+            hide_password=True,
         )
 
     def _check_api_tokens(self) -> bool:
@@ -176,6 +191,7 @@ class Auth:
             qr = input(f"{Fore.CYAN + Style.BRIGHT}Вход по QRcode? [y/n]{Style.RESET_ALL} ")
 
             if qr[0] == "y":
+                print(f"{Fore.CYAN + Style.BRIGHT}Загрузка QRcode...{Style.RESET_ALL} ")
                 api_id = int(config.get("pyrogram","api_id"))
                 api_hash = config.get("pyrogram","api_hash")
 

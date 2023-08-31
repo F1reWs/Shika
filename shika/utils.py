@@ -1,3 +1,20 @@
+#     ______   __        _   __              
+#   .' ____ \ [  |      (_) [  |  _          
+#   | (___ \_| | |--.   __   | | / ]  ,--.   
+#    _.____`.  | .-. | [  |  | '' <  `'_\ :  
+#   | \____) | | | | |  | |  | |`\ \ // | |, 
+#    \______.'[___]|__][___][__|  \_]\'-;__/ 
+
+#    Shika (telegram userbot by https://github.com/F1reWs/Shika/graphs/contributors)
+#    Copyright (C) 2023 Shika
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    GNU General Public License https://www.gnu.org/licenses.
+
 import asyncio
 import functools
 import random
@@ -5,6 +22,8 @@ import string
 import typing
 import yaml
 import os
+import git
+from git import *
 import contextlib
 import aiohttp
 from types import FunctionType
@@ -42,6 +61,16 @@ def get_full_command(message: Message) -> Union[
         return "", "", ""
 
     return prefixes[0], command.lower(), args[-1] if args else ""
+
+def get_git_hash() -> typing.Union[str, bool]:
+    """
+    Get current Hikka git hash
+    :return: Git commit hash
+    """
+    try:
+        return git.Repo().head.commit.hexsha
+    except Exception:
+        return False
 
 
 async def answer(
@@ -296,16 +325,26 @@ def random_id(size: int = 10) -> str:
         for _ in range(size)
     )
 
-async def paste_neko(code: str):
+def get_git_info() -> typing.Tuple[str, str]:
+    """
+    Get git info
+    :return: Git info
+    """
+    hash_ = get_git_hash()
+    return (
+        hash_,
+        f"https://github.com/F1reWs/Shika/commit/{hash_}" if hash_ else "",
+    )
+
+def get_commit_url() -> str:
+    """
+    Get current Hikka git commit url
+    :return: Git commit url
+    """
     try:
-        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
-            async with session.post(
-                "https://nekobin.com/api/documents",
-                json={"content": code},
-            ) as paste:
-                paste.raise_for_status()
-                result = await paste.json()
+        hash_ = get_git_hash()
+        return (
+            f'<a href="https://github.com/F1reWs/Shika/commit/{hash_}">#{hash_[:7]}</a>'
+        )
     except Exception:
-        return "Pasting failed"
-    else:
-        return f"nekobin.com/{result['result']['key']}.py"
+        return "Unknown"
