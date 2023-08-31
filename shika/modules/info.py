@@ -83,7 +83,8 @@ class AboutMod(loader.Module):
         
         await utils.answer(
             message,
-            custom or text
+            custom or text,
+            disable_preview=True,
         )
 
     async def shika_cmd(self, app: Client, message: types.Message, args: str):
