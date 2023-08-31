@@ -64,7 +64,7 @@ def get_full_command(message: Message) -> Union[
 
 def get_git_hash() -> typing.Union[str, bool]:
     """
-    Get current Hikka git hash
+    Get current Shika git hash
     :return: Git commit hash
     """
     try:
@@ -338,7 +338,7 @@ def get_git_info() -> typing.Tuple[str, str]:
 
 def get_commit_url() -> str:
     """
-    Get current Hikka git commit url
+    Get current Shika git commit url
     :return: Git commit url
     """
     try:
