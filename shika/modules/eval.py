@@ -39,10 +39,14 @@ class EvalMod(loader.Module):
             {
                 'self': self,
                 'client': app,
+                'c': app,
                 'app': app,
+                "utils": utils,
                 'r': message.reply_to_message,
                 'message': message,
-                'args': args
+                'm': message,
+                'args': args,
+                "db": self.db,
             }
         )
         await utils.answer(
