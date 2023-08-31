@@ -57,7 +57,7 @@ class LoaderMod(loader.Module):
         """Загрузить модуль по ссылке. Использование: dlmod <ссылка или all или ничего>"""
         modules_repo = self.db.get(
             "shika.loader", "repo",
-            "https://github.com/CodWize/shika-modules"
+            "https://github.com/F1reWs/shika-mods"
         )
         api_result = await get_git_raw_link(modules_repo)
         if not api_result:
