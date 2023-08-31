@@ -47,9 +47,11 @@ class Auth:
         config.read("./config.ini")
 
         self.app = Client(
-            name="Shika", api_id=config.get('pyrogram', 'api_id'),
+            name=session_name, api_id=config.get('pyrogram', 'api_id'),
             api_hash=config.get('pyrogram', 'api_hash'),
-            app_version=f"v{__version__}"
+            device_model="Shika",
+            app_version=f"v{__version__}",
+            hide_password=True,
         )
 
     def _check_api_tokens(self) -> bool:
