@@ -6,6 +6,7 @@ import typing
 import yaml
 import os
 import git
+from git import *
 import contextlib
 import aiohttp
 from types import FunctionType
@@ -295,20 +296,6 @@ def random_id(size: int = 10) -> str:
         random.choice(string.ascii_letters + string.digits)
         for _ in range(size)
     )
-
-async def paste_neko(code: str):
-    try:
-        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
-            async with session.post(
-                "https://nekobin.com/api/documents",
-                json={"content": code},
-            ) as paste:
-                paste.raise_for_status()
-                result = await paste.json()
-    except Exception:
-        return "Pasting failed"
-    else:
-        return f"nekobin.com/{result['result']['key']}.py"
 
 def get_git_info() -> typing.Tuple[str, str]:
     """
