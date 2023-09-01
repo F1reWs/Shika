@@ -254,6 +254,5 @@ class Auth:
             await self.app.disconnect()
             return sys.exit(64)
 
-        me = await self.app.get_me()
         self.db.set("shika.me", "id", me.id)
         return me, self.app
