@@ -35,7 +35,7 @@ from pyrogram.raw.functions.auth.export_login_token import ExportLoginToken
 from qrcode.main import QRCode
 
 
-from . import __version__
+from . import __version__, database
 
 Session.notice_displayed: bool = True
 
@@ -60,6 +60,9 @@ class Auth:
 
         config = configparser.ConfigParser()
         config.read("./config.ini")
+
+        db: database.Database,
+        self.db = db
 
         self.app = Client(
             name=session_name, api_id=config.get('pyrogram', 'api_id'),
