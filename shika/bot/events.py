@@ -23,11 +23,14 @@ from aiogram.types import (CallbackQuery, InlineQuery,
                         Message)
 
 from .. import utils
-from .types import Item
+from .types import Item, database
 
 
 class Events(Item):
     """Обработчик событий"""
+
+    def __init__(self):
+        self.db = database.db
 
     async def _message_handler(self, message: Message) -> Message:
         """Обработчик сообщений"""
@@ -59,30 +62,40 @@ class Events(Item):
         """Обработчик инлайн-хендеров"""
         if not (query := inline_query.query):
             commands = ""
+            ccommands = 0
             for command, func in self._all_modules.inline_handlers.items():
                 if await self._check_filters(func, func.__self__, inline_query):
                     commands += f"\n💬 <code>@{(await self.bot.me).username} {command}</code>"
-
-            message = InputTextMessageContent(
-                f"👇 <b>Доступные команды</b>\n"
-                f"{commands}"
-            )
+                    ccommands += 1
+            if commands == "":
+              message = InputTextMessageContent(
+                         f"<b>😔 Нету доступных инлайн команд или у вас нет к ним доступа</b>"
+                       )
+              descr = f"У вас нет доступных команд"
+            else:
+              message = InputTextMessageContent(
+                         f"<b>ℹ️ Доступные инлайн команды:</b>\n"
+                         f"{commands}"
+                       )
+              descr = f"{ccommands} команд доступно"
 
             return await inline_query.answer(
                 [
                     InlineQueryResultArticle(
                         id=utils.random_id(),
-                        title="Доступные команды",
+                        title="Доступные инлайн команды",
+                        description=descr,
                         input_message_content=message,
-#                        thumb_url="ссылку на фото",
+                        thumb_url="https://api.f1rew.me/file/speech_balloon_apple.png",
                     )
                 ], cache_time=0
             )
-
-        query_ = query.split()
-
-        cmd = query_[0]
-        args = " ".join(query_[1:])
+        try:
+          query_ = query.split()
+          cmd = query_[0]
+          args = " ".join(query_[1:])
+        except IndexError:
+          return
 
         func = self._all_modules.inline_handlers.get(cmd)
         if not func:
@@ -92,8 +105,8 @@ class Events(Item):
                         id=utils.random_id(),
                         title="Ошибка",
                         input_message_content=InputTextMessageContent(
-                            "❌ Такой инлайн-команды нет"),
-#                        thumb_url="ссылку на фото"
+                            "❌ <b>Инлайн команда не найдена!</b>"),
+                        thumb_url="https://api.f1rew.me/file/x.png"
                     )
                 ], cache_time=0
             )
