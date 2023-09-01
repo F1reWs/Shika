@@ -154,4 +154,4 @@ class BotManager(
         if not_set_token == True:
             await self.bot.send_photo(chat_id=me_info.id, photo="https://global-uploads.webflow.com/6030eb20edb267a2d11d31f6/62ea266ac8026819f977ca7d_07UG_TelegramforBusiness_8bb65f395e5cea9300a99d7185d69afb_2000.png", caption=hello_text, parse_mode="HTML", reply_markup=keyboard)
 
-        return True
+        return True#
