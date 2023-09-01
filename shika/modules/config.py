@@ -114,15 +114,30 @@ class ConfigMod(loader.Module):
         for module in modules:
             name = module.name
 
+            attrs = self.get_attrs(module)
+
+            if not attrs:
+              pass
+
+            con = 1
+
+            for namee in attrs:
+               if namee not in self.DEFAULT_ATTRS:
+                 con += 1
+        
+            if con == 1:
+               pass
+
             if 'config' in name.lower():
                 continue
 
-            data = f'mod_{name}|{call.inline_message_id}'
-            buttons.append(InlineKeyboardButton(name, callback_data=str(data)))
+            if attrs and con != 1:
+               data = f'mod_{name}|{call.inline_message_id}'
+               buttons.append(InlineKeyboardButton(name, callback_data=str(data)))
 
-            if count % 3 == 0:
-                inline_keyboard.row(*buttons)
-                buttons.clear()
+               if count % 3 == 0:
+                   inline_keyboard.row(*buttons)
+                   buttons.clear()
 
             count += 1
 
@@ -148,7 +163,7 @@ reply_markup=inline_keyboard)
         attrs = self.get_attrs(mod)
 
         if not attrs:
-            return await call.answer('У этого модуля нету атрибутов', show_alert=True)
+            return await call.answer('😞 У этого модуля нету атрибутов', show_alert=False)
 
         buttons = []
         count = 1
