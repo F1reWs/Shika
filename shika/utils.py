@@ -184,13 +184,19 @@ async def answer_inline(
     message: Message
 
     results = await app.get_inline_bot_results(bot, query)
-    
-    await app.send_inline_bot_result(
+
+    try:
+       await app.send_inline_bot_result(
         chat_id or message.chat.id,
         results.query_id,
         results.results[0].id,
-        reply_to_message_id=message.reply_to_top_message_id or message.reply_to_message.id or message.reply_to_message_id or message.id or message.message_id,
-    )
+        reply_to_message_id=message.reply_to_top_message_id or message.reply_to_message.id or message.reply_to_message_id,
+       )
+    except:
+        await app.send_inline_bot_result(
+        chat_id or message.chat.id,
+        results.query_id,
+        results.results[0].id)
 
 def run_sync(func: FunctionType, *args, **kwargs) -> asyncio.Future:
     """Запускает асинхронно нон-асинк функцию
