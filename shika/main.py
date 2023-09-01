@@ -111,6 +111,9 @@ async def main():
 
         db.pop("shika.loader", "restart")
 
+    me = await app.get_me()
+    db.set("shika.me", "id", me.id)
+    
     await idle()
 
     logging.info("Завершение работы...")
