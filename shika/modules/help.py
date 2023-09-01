@@ -53,11 +53,11 @@ class HelpMod(loader.Module):
                 if not commands and not inline:
                     pass
                 else:
-                    text += f"\n<b>{module.name}</b> - "  + (commands if commands else '`Команд не найдено`') + inline
+                    text += f"\n<emoji id=4971987363145188045>🔹</emoji> <b>{module.name}</b> - "  + (commands if commands else '`Команд не найдено`') + inline
 
             return await utils.answer(
                 message, 
-                f"<emoji id=5359370246190801956>☕️</emoji> Доступные модули <b>{len(self.all_modules.modules)-1}</b>\n<emoji id=5228968570863496802>🤖</emoji> Инлайн бот: <b>@{self.bot_username}</b>\n"
+                f"<b><emoji id=5226512880362332956>📖</emoji> {len(self.all_modules.modules)-1} модулей доступно</b>\n"
                 f"{text}"
             )
 
@@ -68,12 +68,12 @@ class HelpMod(loader.Module):
         prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
 
         command_descriptions = "\n".join(
-            f"👉 <code>{prefix + command}</code>\n"
+            f"<emoji id=5100862156123931478>🔸</emoji> <code>{prefix + command}</code>\n"
             f"    ╰ {module.command_handlers[command].__doc__ or 'Нет описания для команды'}"
             for command in module.command_handlers
         )
         inline_descriptions = "\n".join(
-            f"👉 <code>@{self.bot_username + ' ' + command}</code>\n"
+            f"<emoji id=5100862156123931478>🔸</emoji> <code>@{self.bot_username + ' ' + command}</code>\n"
             f"    ╰ {module.inline_handlers[command].__doc__ or 'Нет описания для команды'}"
             for command in module.inline_handlers
         )
