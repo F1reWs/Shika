@@ -52,6 +52,7 @@ class BackuperMod(loader.Module):
 
     async def restoredb_cmd(self, app: Client, message: types.Message):
         """Восстановить базу данных из файла с реплая. Использование: restoredb <реплай на файл с названием db.json>"""
+        return await utils.answer(message, f"<emoji id=5346036820868083187>😞</emoji><b>Команда временно не доступна.</b>")
         reply = message.reply_to_message
         if (
             not reply
