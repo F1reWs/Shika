@@ -71,8 +71,11 @@ class DispatcherManager:
         command = self.modules.aliases.get(command, command)
         func = self.modules.command_handlers.get(command.lower())
         if not func:
+            return 
+        
+        if not await check_filters(func, app, message):
             return
-    
+
 
         try:
             if (
