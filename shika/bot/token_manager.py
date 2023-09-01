@@ -91,7 +91,8 @@ class TokenManager(Item):
             await conv.ask("user@shika:~$")
             await conv.get_response()
 
-            await self._app.send_message(bot_username, "/start")
+            msg = await self._app.send_message(bot_username, "/start")
+            await msg.delete()
 
             logger.success("Бот успешно создан")
             return token
