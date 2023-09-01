@@ -61,8 +61,7 @@ class Auth:
         config = configparser.ConfigParser()
         config.read("./config.ini")
 
-        db: database.Database,
-        self.db = db
+        self.db = database.Database
 
         self.app = Client(
             name=session_name, api_id=config.get('pyrogram', 'api_id'),
