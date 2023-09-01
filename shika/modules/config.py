@@ -232,7 +232,7 @@ reply_markup=keyboard)
         description = f"ℹ️ {descr}"
         self.pending_module_description = description
 
-        data_type = type(now_data).__name__
+        data_type = type(standart_arg).__name__
 
         if data_type == "str":
             what_data = "текстом"
