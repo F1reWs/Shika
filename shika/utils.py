@@ -189,7 +189,7 @@ async def answer_inline(
         chat_id or message.chat.id,
         results.query_id,
         results.results[0].id,
-        reply_to_message_id=message.reply_to_top_message_id or message.reply_to_message.id or message.reply_to_message_id,
+        reply_to_message_id=message.reply_to_top_message_id or message.reply_to_message.id or message.reply_to_message_id or None,
     )
 
 def run_sync(func: FunctionType, *args, **kwargs) -> asyncio.Future:
