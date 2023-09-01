@@ -239,9 +239,7 @@ class Auth:
                 if not logged:
                     me: types.User = await self.enter_2fa()
                 else:          
-                    me: types.User = await self.app.get_me()  
-                me = await self.app.get_me()
-                self.db.set("shika.me", "id", me.id)
+                    me: types.User = await self.app.get_me()
                 
                 print(f"""
 {Fore.CYAN + Style.BRIGHT}Shika была успешно установлена!{Style.RESET_ALL}
@@ -254,4 +252,6 @@ class Auth:
             await self.app.disconnect()
             return sys.exit(64)
 
+        me = await self.app.get_me()
+        self.db.set("shika.me", "id", me.id)
         return me, self.app
