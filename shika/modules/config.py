@@ -97,7 +97,7 @@ class ConfigMod(loader.Module):
 
     @loader.on_bot(lambda _, __, call: call.data == "send_cfg")
     async def config_callback_handler(self, app: Client, call: CallbackQuery):
-        if call.from_user.id != (await app.get_me()).id:
+        if call.from_user.id != self.db.get("shika.me", "id"):
             return await call.answer('Ты не владелец')
 
         me = await app.get_me()
@@ -136,7 +136,7 @@ reply_markup=inline_keyboard)
 
     @loader.on_bot(lambda _, __, call: call.data.startswith('mod'))
     async def answer_callback_handler(self, app: Client, call: CallbackQuery):
-        if call.from_user.id != (await app.get_me()).id:
+        if call.from_user.id != self.db.get("shika.me", "id"):
             return await call.answer('Ты не владелец')
         data = call.data
         data_parts = data.split('|')
@@ -188,6 +188,7 @@ reply_markup=keyboard)
 
     @loader.on_bot(lambda _, __, call: call.data.startswith('ch_attr_'))
     async def change_attribute_callback_handler(self, app: Client, call: CallbackQuery):
+      if call.from_user.id == self.db.get("shika.me", "id"):
         self.bot_username = (await self.bot.bot.get_me()).username
         data = call.data.replace('ch_attr_', '').split('_')
         module = data[0]
@@ -262,7 +263,7 @@ reply_markup=keyboard)
 
     @loader.on_bot(lambda _, __, data: data.data == 'aaa')
     async def aaa_callback_handler(self, app: Client, call: CallbackQuery):
-        if call.from_user.id != (await app.get_me()).id:
+        if call.from_user.id != self.db.get("shika.me", "id"):
             return await call.answer('Ты не владелец')
         keyboard = InlineKeyboardMarkup()
 
@@ -307,7 +308,7 @@ reply_markup=keyboard)
     @loader.on_bot(lambda self, __, msg: len(self.pending_id) != 50)
     async def change_message_handler(self, app: Client, message: Message):
       if self.pending_id in message.text:
-        if message.from_user.id != (await app.get_me()).id:
+        if message.from_user.id != self.db.get("shika.me", "id"):
             return
         if self.pending_id in message.text:
           if self.pending_edit == "new":
@@ -339,7 +340,7 @@ reply_markup=keyboard)
           self.pending_edit = False
 
     async def cfg_inline_handler(self, app: Client, inline_query: InlineQuery):
-        if inline_query.from_user.id == (await app.get_me()).id:
+        if inline_query.from_user.id == self.db.get("shika.me", "id"):
             await self.set_cfg(inline_query)
 
     async def set_cfg(self, inline_query):
