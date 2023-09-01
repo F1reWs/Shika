@@ -50,8 +50,11 @@ class TesterMod(loader.Module):
         if not args:
             args = "40"
 
-
-        lvl = int(args)
+        try:
+          lvl = int(args)
+        except:
+            return await utils.answer(
+                message, "<b><emoji id=5312526098750252863>❌</emoji> Вы не указали уровень или указали неверный уровень логов</b>")
 
         if not args or lvl < 0 or lvl > 60:
             return await utils.answer(
@@ -67,10 +70,11 @@ class TesterMod(loader.Module):
         logs = io.BytesIO(logs)
         logs.name = "shika.log"
 
-        return await message.reply_document(
+        await message.reply_document(
             document=logs,
             caption=f"<b><emoji id=5433614747381538714>📤</emoji> Shika Логи с {lvl} ({logging.getLevelName(lvl)}) уровнем</b>"
             )
+        return await message.delete()
     
     async def setprefix_cmd(self, app: Client, message: types.Message, args: str):
         """Изменить префикс, можно несколько штук разделённые пробелом. Использование: setprefix <префикс> [префикс, ...]"""
