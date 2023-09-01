@@ -25,18 +25,21 @@ from pyrogram.handlers import MessageHandler
 from . import loader, utils
 
 async def check_filters(func: FunctionType, app: Client, message: types.Message) -> bool:
-    """Проверка фильтров"""
-    if not message.outgoing:
-        if (custom_filters := getattr(func, "_filters", None)):
-            coro = custom_filters(app, message)
-            if isinstance(coro, types.CoroutineType):
-                coro = await coro
+    if custom_filters := getattr(func, "_filters", None):
+        coro = custom_filters(app, message)
 
-            if not coro:
-                return False
-        else:
+        if inspect.iscoroutine(coro):
+            coro = await coro
+
+        if not coro:
             return False
+
+    elif message.from_user.id == (await app.get_me()).id:
+        return True
     
+    elif not message.outgoing:
+        return False
+
     return True
 
 class DispatcherManager:
