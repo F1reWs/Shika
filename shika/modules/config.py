@@ -57,7 +57,7 @@ class ConfigMod(loader.Module):
             'all_modules', 'author', 'bot', 'callback_handlers',
             'command_handlers', 'inline_handlers', 'bot_username',
             'message_handlers', 'name', 'version', 'watcher_handlers',
-            'boot_time'
+            'boot_time', 'shika.bot', 'shika.loader', 'shika.me', 'Updater',
         ]
         self.config = None  # Пoявляется после get_attrs
         self.pending = False
@@ -152,8 +152,17 @@ reply_markup=inline_keyboard)
 
         buttons = []
         count = 1
+        con = 1
 
         for name in attrs:
+          if name not in self.DEFAULT_ATTRS:
+            con += 1
+        
+        if con == 1:
+            return await call.answer('😞 У этого модуля нету атрибутов', show_alert=False)
+
+        for name in attrs:
+          if name not in self.DEFAULT_ATTRS:
             buttons.append(
                 InlineKeyboardButton(
                     name, callback_data=f'ch_attr_{mod.name.split(".")[-1]}_{name}'
