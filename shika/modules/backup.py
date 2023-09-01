@@ -78,7 +78,7 @@ text=f'<b><emoji id=5328274090262275771>🕐</emoji> Перезагрузка...
                 "shika.loader", "restart", {
                     "msg": f"{m.chat.id}:{m.id}",
                     "start": str(round(time.time())),
-                    "type": "restoredb"
+                    "type": "restart"
                 }
             )
         return sys.exit(0)
