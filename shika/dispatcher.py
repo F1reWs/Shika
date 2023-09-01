@@ -22,9 +22,10 @@ from types import FunctionType
 from pyrogram import Client, filters, types
 from pyrogram.handlers import MessageHandler
 
-from . import loader, utils
+from . import loader, utils, database
 
-async def check_filters(func: FunctionType, app: Client, message: types.Message) -> bool:
+async def check_filters(self, func: FunctionType, app: Client, message: types.Message) -> bool:
+    db = database.db
     if custom_filters := getattr(func, "_filters", None):
         coro = custom_filters(app, message)
 
@@ -34,7 +35,7 @@ async def check_filters(func: FunctionType, app: Client, message: types.Message)
         if not coro:
             return False
 
-    elif message.from_user.id == (await app.get_me()).id:
+    elif message.from_user.id == db.get("shika.me", "id"):
         return True
     
     elif not message.outgoing:
@@ -75,7 +76,7 @@ class DispatcherManager:
         if not func:
             return 
         
-        if not await check_filters(func, app, message):
+        if not await check_filters(self, func, app, message):
             return
 
 
