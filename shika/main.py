@@ -78,6 +78,7 @@ async def main():
     print(f'{Fore.MAGENTA}Твой префикс - "{prefix}"{Style.RESET_ALL}')
 
     if (restart := db.get("shika.loader", "restart")):
+      try:
         restarted_text = (
             f"<b><emoji id=6334758581832779720>✅</emoji> Shika полностью перезагружена! ({round(time.time())-int(restart['start'])} сек.)</b>"
             if restart["type"] == "restart"
@@ -110,6 +111,17 @@ async def main():
                 await msg.edit(restarted_text)
 
         db.pop("shika.loader", "restart")
+      except:
+        token = db.get("shika.bot", "token")
+        url = f'https://api.telegram.org/bot{token}/sendMessage?'
+
+        payload = {
+               'chat_id': db.get("shika.me", "id"),
+               'text': "<b>✅ Shika была успешно перезагружена!</b>\n<i>Сообщение отправлено сюда, так как Shika не смогла отредактировать сообщение в чате где она перезагружалась.</i>",
+               'parse_mode': "HTML",
+            }
+        response = requests.post(url, json=payload)    
+        db.pop("shika.loader", "restart") 
 
     me = await app.get_me()
     db.set("shika.me", "id", me.id)
