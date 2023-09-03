@@ -387,7 +387,6 @@ def ascii_face() -> str:
                 "(*˘︶˘*)",
             ]
         )
-    )
 
 
 def random_id(size: int = 10) -> str:
