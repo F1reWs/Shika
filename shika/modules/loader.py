@@ -315,8 +315,9 @@ class LoaderMod(loader.Module):
             'updater',
             'backuper'
         ]
-        
-        if module_name.lower() in modules.lower():
+
+        for mods in modules:
+          if module_name.lower() in mods.lower():
             return await utils.answer(
                 message,
                 "<emoji id=5312526098750252863>❌</emoji><b> Выгружать встроенные модули нельзя</b>"
