@@ -108,6 +108,7 @@ class LoaderMod(loader.Module):
         error_text: str = None
         module_name: str = None
         count = 0
+        prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
 
         if args == "all":
             for module in modules:
@@ -136,7 +137,7 @@ class LoaderMod(loader.Module):
 
                 module_name = await self.all_modules.load_module(r.text, r.url)
                 if module_name is True:
-                    error_text = "✅ Зависимости установлены. Требуется перезагрузка"
+                    error_text = "<emoji id=5348498983884960309>🚀</emoji> <b>Зависимости установлены, но нужна перезагрузка </b>{prefix}restart"
 
                 if not module_name:
                     error_text = "❌ Не удалось загрузить модуль. Подробности смотри в логах"
