@@ -1,6 +1,6 @@
 <p align="center">
     </a>
-    <img alt="Telegram" src="https://api.f1rew.me/file/shika_logo.jpg">
+    <img alt="Telegram" width="300px" src="https://api.f1rew.me/file/shika_logo.jpg">
     <br>
     <b>ShikaUB v0.0.0 BETA</b>
     <br>
