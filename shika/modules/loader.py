@@ -112,7 +112,7 @@ class LoaderMod(loader.Module):
             if mod is True:
                 error_text = f"<emoji id=5348498983884960309>🚀</emoji> <b>Зависимости установлены, но нужна перезагрузка </b>{prefix}restart"
 
-            if not module_name:
+            if not mod:
                 error_text = "❌ Не удалось загрузить модуль. Подробности смотри в логах"
         except requests.exceptions.MissingSchema:
             error_text = "❌ Ссылка указана неверно"
@@ -154,10 +154,10 @@ class LoaderMod(loader.Module):
         )
 
         if mod.version:
-            module_version = f" (<code>{module_name.version}</code>)"
+            module_version = f" (<code>{mod.version}</code>)"
 
         if mod.author:
-            module_author = f"<b>by <code>{module_name.author}</code></b>"
+            module_author = f"<b>by <code>{mod.author}</code></b>"
         
         return await utils.answer(
             message, f"""<b>
