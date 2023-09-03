@@ -60,6 +60,8 @@ class TesterMod(loader.Module):
             return await utils.answer(
                 message, "<b><emoji id=5312526098750252863>❌</emoji> Вы не указали уровень или указали неверный уровень логов</b>")
 
+        await utils.answer(message, f"<b><emoji id=5325543345760509967>🔄</emoji> Отправляю логи...</b>")
+
         handler: CustomStreamHandler = log.handlers[1] # type: ignore
         logs = '\n'.join(str(error) for error in handler.logs).encode('utf-8')
         
