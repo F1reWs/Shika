@@ -19,6 +19,7 @@ import configparser
 import logging
 import sys
 import os
+import getpass
 
 import base64
 import asyncio
@@ -174,7 +175,7 @@ class Auth:
         """Ввести код двухфакторной аутентификации"""
         while True:
             try:
-                passwd = input(f"{Fore.CYAN + Style.BRIGHT}Введи пароль от 2FA:{Style.RESET_ALL} ")
+                passwd = getpass.getpass(f"{Fore.CYAN + Style.BRIGHT}Введи пароль от 2FA:{Style.RESET_ALL} ")
 
                 return await self.app.check_password(passwd)
             except errors.BadRequest:
