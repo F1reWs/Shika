@@ -57,7 +57,7 @@ class ConfigMod(loader.Module):
             'all_modules', 'author', 'bot', 'callback_handlers',
             'command_handlers', 'inline_handlers', 'bot_username',
             'message_handlers', 'name', 'version', 'watcher_handlers',
-            'boot_time', 'shika.bot', 'shika.loader', 'shika.me', 'Updater',
+            'boot_time', 'shika.bot', 'shika.loader', 'shika.me', 'Updater', 'Loader',
         ]
         self.config = None  # Пoявляется после get_attrs
         self.pending = False
@@ -99,7 +99,6 @@ class ConfigMod(loader.Module):
     async def config_callback_handler(self, app: Client, call: CallbackQuery):
         if call.from_user.id != self.db.get("shika.me", "id"):
             return await call.answer('Ты не владелец')
-
         inline_keyboard = InlineKeyboardMarkup(row_width=3, resize_keyboard=True)
         modules = [mod for mod in self.all_modules.modules]
         message: Message = await self.inline_bot.edit_message_text(inline_message_id=call.inline_message_id, text="<b>🌀 Shika</b>", reply_markup=inline_keyboard)
