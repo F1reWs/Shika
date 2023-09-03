@@ -218,7 +218,7 @@ class LoaderMod(loader.Module):
             file.write(module_source)
         
         return await utils.answer(
-            message, f"✅ Модуль \"<code>{module_name}</code>\" загружен")
+            message, f"<emoji id=5891237108974095799>🌈</emoji> Модуль {module_name} загружен {utils.ascii_face}\n<emoji id=5983568653751160844>ℹ️</emoji> {module.__doc__ or 'Нет описания для модуля'}")
     
     async def ml_cmd(self, app: Client, message: types.Message, args: str):
         """Скинуть файл модуля"""
