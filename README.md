@@ -1,5 +1,6 @@
 <p align="center">
     </a>
+    [![Typing SVG](https://api.f1rew.me/file/shika_logo.jpg)](https://t.me/shikaub)
     <br>
     <b>ShikaUB v0.0.0 BETA</b>
     <br>
