@@ -308,11 +308,12 @@ class LoaderMod(loader.Module):
             'config',
             'eval',
             'help',
-            'info',
+            'userbot',
             'moduleGuard',
             'terminal',
             'tester',
             'updater'
+            'backuper'
         ]
         
         if module_name in modules:
