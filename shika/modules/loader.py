@@ -175,6 +175,8 @@ class LoaderMod(loader.Module):
         if not file:
             return await utils.answer(
                 message, "❌ Нет реплая на файл")
+        
+        await message.edit(f"<b><emoji id=5325792861885570739>🔄</emoji> Устанавливаю модуль...</b>")
 
         file = await reply.download()
 
@@ -203,7 +205,8 @@ class LoaderMod(loader.Module):
             return await utils.answer(
                 message, "❌ Неверная кодировка файла")
 
-        module_name = await self.all_modules.load_module(module_source)
+        mod = await self.all_modules.load_module(module_source)
+        module_name = mod.name
 
         if module_name is True:
             return await utils.answer(
@@ -216,9 +219,38 @@ class LoaderMod(loader.Module):
         module = '_'.join(module_name.lower().split())
         with open(f'shika/modules/{module}.py', 'w', encoding="utf-8") as file:
             file.write(module_source)
+
+        prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
+
+        command_descriptions = ""
+        inline_descriptions = ""
+        module_version = ""
+        module_author = ""
+
+        command_descriptions = "\n".join(
+            f"<emoji id=5100862156123931478>🔸</emoji> <code>{prefix + command}</code> {mod.command_handlers[command].__doc__ or 'Нет описания для команды'}"
+            for command in mod.command_handlers
+        )
+        inline_descriptions = "\n".join(
+            f"<emoji id=5100862156123931478>🔸</emoji> <code>@{self.bot_username + ' ' + command}</code> {mod.inline_handlers[command].__doc__ or 'Нет описания для команды'}"
+            for command in mod.inline_handlers
+        )
+
+        if mod.version:
+            module_version = f" (<code>{mod.version}</code>)"
+
+        if mod.author:
+            module_author = f"<b>by <code>{mod.author}</code></b>"
         
         return await utils.answer(
-            message, f"<emoji id=5891237108974095799>🌈</emoji> Модуль {module_name} загружен {utils.ascii_face}\n<emoji id=5983568653751160844>ℹ️</emoji> {module.__doc__ or 'Нет описания для модуля'}")
+            message, f"""<b>
+<emoji id=5891237108974095799>🌈</emoji> Модуль <code>{module_name}</code>{module_version} загружен {utils.ascii_face}
+<emoji id=5983568653751160844>ℹ️</emoji> </b><i>{mod.__doc__ or 'Нет описания для модуля'}</i>
+
+{command_descriptions}
+{inline_descriptions}
+{module_author}
+""")
     
     async def ml_cmd(self, app: Client, message: types.Message, args: str):
         """Скинуть файл модуля"""
@@ -229,11 +261,13 @@ class LoaderMod(loader.Module):
             message, "<emoji id=5312526098750252863>❌</emoji> <b>Вы не указали модуль</b>")
 
         await message.edit(f"<emoji id=5327902038720257153>🔄</emoji><b>Отправляю модуль...</b>")
-        module = args.split(maxsplit=1)[0].replace('.py', '')
+        module = args
+        module_l = module.lower()
         if module + '.py' not in os.listdir('./shika/modules'):
             mods = self.db.get("shika.loader", "modules")
-            for mod in mods:
-                if module in mod:
+            if mods:
+             for mod in mods:
+                if module_l in mod.lower():
                     response = requests.get(mod)
                     content = response.content
                     file = io.BytesIO(content)
@@ -280,6 +314,12 @@ class LoaderMod(loader.Module):
                 message,
                 "❌ Выгружать встроенные модули нельзя"
             )
+        
+        module = '_'.join(module_name.lower().split())
+        try:
+            os.remove(f'shika/modules/{module}.py')
+        except:
+            pass
 
         return await utils.answer(
             message, f"✅ Модуль \"<code>{module_name}</code>\" выгружен")
