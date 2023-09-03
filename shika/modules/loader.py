@@ -86,7 +86,7 @@ class LoaderMod(loader.Module):
     async def dlmod_cmd(self, app: Client, message: types.Message, args: str):
         """Загрузить модуль по ссылке. Использование: dlmod <ссылка или название модуля>"""
         modules_repo = self.db.get("Loader", "repo")
-        module_name = None
+        mod = None
         error_text = False
         
         if not modules_repo:
@@ -108,8 +108,8 @@ class LoaderMod(loader.Module):
             r = await utils.run_sync(requests.get, args)
             r.raise_for_status()  # Бросить исключение, если запрос завершился неудачей
 
-            module_name = await self.all_modules.load_module(r.text, r.url)
-            if module_name is True:
+            mod = await self.all_modules.load_module(r.text, r.url)
+            if mod is True:
                 error_text = f"<emoji id=5348498983884960309>🚀</emoji> <b>Зависимости установлены, но нужна перезагрузка </b>{prefix}restart"
 
             if not module_name:
@@ -122,7 +122,7 @@ class LoaderMod(loader.Module):
               r = await utils.run_sync(requests.get, args)
               r.raise_for_status()  # Бросить исключение, если запрос завершился неудачей
 
-              module_name = await self.all_modules.load_module(r.text, r.url)
+              mod = await self.all_modules.load_module(r.text, r.url)
               if module_name is True:
                   error_text = f"<emoji id=5348498983884960309>🚀</emoji> <b>Зависимости установлены, но нужна перезагрузка </b>{prefix}restart"
 
@@ -145,24 +145,24 @@ class LoaderMod(loader.Module):
         module_author = ""
 
         command_descriptions = "\n".join(
-            f"<emoji id=5100862156123931478>🔸</emoji> <code>{prefix + command}</code> {module_name.command_handlers[command].__doc__ or 'Нет описания для команды'}"
-            for command in module_name.command_handlers
+            f"<emoji id=5100862156123931478>🔸</emoji> <code>{prefix + command}</code> {mod.command_handlers[command].__doc__ or 'Нет описания для команды'}"
+            for command in mod.command_handlers
         )
         inline_descriptions = "\n".join(
-            f"<emoji id=5100862156123931478>🔸</emoji> <code>@{self.bot_username + ' ' + command}</code> {module_name.inline_handlers[command].__doc__ or 'Нет описания для команды'}"
-            for command in module_name.inline_handlers
+            f"<emoji id=5100862156123931478>🔸</emoji> <code>@{self.bot_username + ' ' + command}</code> {mod.inline_handlers[command].__doc__ or 'Нет описания для команды'}"
+            for command in mod.inline_handlers
         )
 
-        if module_name.version:
+        if mod.version:
             module_version = f" (<code>{module_name.version}</code>)"
 
-        if module_name.author:
+        if mod.author:
             module_author = f"<b>by <code>{module_name.author}</code></b>"
         
         return await utils.answer(
             message, f"""<b>
-<emoji id=5891237108974095799>🌈</emoji> Модуль <code>{module_name.name}</code>{module_version} загружен {utils.ascii_face}
-<emoji id=5983568653751160844>ℹ️</emoji> </b><i>{module_name.__doc__ or 'Нет описания для модуля'}</i>
+<emoji id=5891237108974095799>🌈</emoji> Модуль <code>{mod.name}</code>{module_version} загружен {utils.ascii_face}
+<emoji id=5983568653751160844>ℹ️</emoji> </b><i>{mod.__doc__ or 'Нет описания для модуля'}</i>
 
 {command_descriptions}
 {inline_descriptions}
