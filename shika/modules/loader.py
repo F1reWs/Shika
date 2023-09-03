@@ -96,6 +96,8 @@ class LoaderMod(loader.Module):
         if not args:
             return await utils.answer(message, "<emoji id=5312526098750252863>❌</emoji> <b>Вы не указали ссылку/название модуля</b>")
 
+        await message.edit(f"<b><emoji id=5325792861885570739>🔄</emoji> Устанавливаю модуль...</b>")
+
         if modules_repo:
             api_result = await get_git_raw_link(modules_repo)
             if api_result:
@@ -133,9 +135,6 @@ class LoaderMod(loader.Module):
 
         if error_text:
             return await utils.answer(message, error_text)
-       
-       
-        await message.edit(f"<b><emoji id=5325792861885570739>🔄</emoji> Устанавливаю модуль...</b>")
 
         self.db.set("shika.loader", "modules", list(set(self.db.get("shika.loader", "modules", []) + [args])))
         prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
