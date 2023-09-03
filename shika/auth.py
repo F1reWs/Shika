@@ -175,7 +175,7 @@ class Auth:
         """Ввести код двухфакторной аутентификации"""
         while True:
             try:
-                passwd = getpass.getpass(f"{Fore.CYAN + Style.BRIGHT}Введи пароль от 2FA:{Style.RESET_ALL} ")
+                passwd = getpass(f"{Fore.CYAN + Style.BRIGHT}Введи пароль от 2FA:{Style.RESET_ALL} ")
 
                 return await self.app.check_password(passwd)
             except errors.BadRequest:
