@@ -151,10 +151,10 @@ class LoaderMod(loader.Module):
             for command in module_name.inline_handlers
         )
 
-        if mod.version:
+        if module_name.version:
             module_version = f" (<code>{module_name.version}</code>)"
 
-        if mod.author:
+        if module_name.author:
             module_author = f"<b>by <code>{module_name.author}</code></b>"
         
         return await utils.answer(
