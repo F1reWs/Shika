@@ -23,9 +23,7 @@
 <hr>
 <table>
  <tr>
-  <td>
-   <img src="https://api.f1rew.me/file/shika_install.gif" height="500" align="middle">
-  </td>
+   <img src="https://api.f1rew.me/file/shika_install.gif" height="400" align="middle">
   <td>
  </tr>
 </table>
