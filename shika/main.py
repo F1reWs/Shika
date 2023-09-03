@@ -107,7 +107,8 @@ async def main():
     text=restarted_text
            )
             db.pop("shika.loader", "restart")
-      except:
+      except Exception as err:
+        print(err)
         token = db.get("shika.bot", "token")
         url = f'https://api.telegram.org/bot{token}/sendMessage?'
 
