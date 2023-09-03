@@ -312,7 +312,7 @@ class LoaderMod(loader.Module):
             'moduleGuard',
             'terminal',
             'tester',
-            'updater'
+            'updater',
             'backuper'
         ]
         
