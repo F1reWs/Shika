@@ -189,11 +189,12 @@ class LoaderMod(loader.Module):
             'config',
             'eval',
             'help',
-            'info',
+            'userbot',
             'moduleGuard',
             'terminal',
             'tester',
-            'updater'
+            'updater',
+            'backuper',
         ]
         
         for mod in modules:
