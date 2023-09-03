@@ -88,22 +88,7 @@ class LoaderMod(loader.Module):
         modules_repo = self.db.get("Loader", "repo")
         module_name = None
         error_text = False
-        prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
-
-        command_descriptions = ""
-        inline_descriptions = ""
-        module_version = ""
-        module_author = ""
-
-        command_descriptions = "\n".join(
-            f"<emoji id=5100862156123931478>🔸</emoji> <code>{prefix + command}</code> {mod.command_handlers[command].__doc__ or 'Нет описания для команды'}"
-            for command in mod.command_handlers
-        )
-        inline_descriptions = "\n".join(
-            f"<emoji id=5100862156123931478>🔸</emoji> <code>@{self.bot_username + ' ' + command}</code> {mod.inline_handlers[command].__doc__ or 'Нет описания для команды'}"
-            for command in mod.inline_handlers
-        )
-
+        
         if not modules_repo:
             modules_repo = "https://github.com/F1reWs/shika_modules"
             self.db.set("Loader", "repo", modules_repo)
@@ -150,11 +135,32 @@ class LoaderMod(loader.Module):
             return await utils.answer(message, error_text)
 
         self.db.set("shika.loader", "modules", list(set(self.db.get("shika.loader", "modules", []) + [args])))
+        prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
 
+        command_descriptions = ""
+        inline_descriptions = ""
+        module_version = ""
+        module_author = ""
+
+        command_descriptions = "\n".join(
+            f"<emoji id=5100862156123931478>🔸</emoji> <code>{prefix + command}</code> {module_name.command_handlers[command].__doc__ or 'Нет описания для команды'}"
+            for command in module_name.command_handlers
+        )
+        inline_descriptions = "\n".join(
+            f"<emoji id=5100862156123931478>🔸</emoji> <code>@{self.bot_username + ' ' + command}</code> {module_name.inline_handlers[command].__doc__ or 'Нет описания для команды'}"
+            for command in module_name.inline_handlers
+        )
+
+        if mod.version:
+            module_version = f" (<code>{module_name.version}</code>)"
+
+        if mod.author:
+            module_author = f"<b>by <code>{module_name.author}</code></b>"
+        
         return await utils.answer(
             message, f"""<b>
 <emoji id=5891237108974095799>🌈</emoji> Модуль <code>{module_name}</code>{module_version} загружен {utils.ascii_face}
-<emoji id=5983568653751160844>ℹ️</emoji> </b><i>{mod.__doc__ or 'Нет описания для модуля'}</i>
+<emoji id=5983568653751160844>ℹ️</emoji> </b><i>{module_name.__doc__ or 'Нет описания для модуля'}</i>
 
 {command_descriptions}
 {inline_descriptions}
