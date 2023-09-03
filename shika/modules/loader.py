@@ -113,9 +113,9 @@ class LoaderMod(loader.Module):
                 error_text = f"<emoji id=5348498983884960309>🚀</emoji> <b>Зависимости установлены, но нужна перезагрузка </b>{prefix}restart"
 
             if not mod:
-                error_text = "❌ Не удалось загрузить модуль. Подробности смотри в логах"
+                error_text = "<b><emoji id=5312526098750252863>❌</emoji> Не удалось загрузить модуль. Подробности смотри в логах</b>"
         except requests.exceptions.MissingSchema:
-            error_text = "❌ Ссылка указана неверно"
+            error_text = "<emoji id=5312526098750252863>❌</emoji><b> Ссылка указана неверно</b>"
         except requests.exceptions.RequestException as e:
             args = old_args
             try:
@@ -127,11 +127,11 @@ class LoaderMod(loader.Module):
                   error_text = f"<emoji id=5348498983884960309>🚀</emoji> <b>Зависимости установлены, но нужна перезагрузка </b>{prefix}restart"
 
               if not mod:
-                   error_text = "❌ Не удалось загрузить модуль. Подробности смотри в логах"
+                   error_text = "<emoji id=5312526098750252863>❌</emoji><b> Не удалось загрузить модуль. Подробности смотри в логах</b>"
             except requests.exceptions.MissingSchema:
-                 error_text = "❌ Ссылка указана неверно"
+                 error_text = "<emoji id=5312526098750252863>❌</emoji><b> Ссылка указана неверно</b>"
             except requests.exceptions.RequestException as e:
-               error_text = f"❌ Произошла ошибка при запросе: {str(e)}"
+               error_text = f"<emoji id=5312526098750252863>❌</emoji><b> Произошла ошибка при запросе:</b> {str(e)}"
 
         if error_text:
             return await utils.answer(message, error_text)
@@ -182,7 +182,7 @@ class LoaderMod(loader.Module):
 
         if not file:
             return await utils.answer(
-                message, "❌ Нет реплая на файл")
+                message, "<emoji id=5312526098750252863>❌</emoji><b> Нет реплая на файл</b>")
         
         await message.edit(f"<b><emoji id=5325792861885570739>🔄</emoji> Устанавливаю модуль...</b>")
 
@@ -203,7 +203,7 @@ class LoaderMod(loader.Module):
             if file == mod:
                 return await utils.answer(
                     message,
-                    "❌ Нельзя загружать встроенные модули"
+                    "<emoji id=5312526098750252863>❌</emoji><b> Нельзя загружать встроенные модули</b>"
                 )
 
         try:
@@ -211,7 +211,7 @@ class LoaderMod(loader.Module):
                 module_source = file.read()
         except UnicodeDecodeError:
             return await utils.answer(
-                message, "❌ Неверная кодировка файла")
+                message, "<emoji id=5312526098750252863>❌</emoji><b> Неверная кодировка файла</b>")
 
         mod = await self.all_modules.load_module(module_source)
         module_name = mod.name
@@ -222,7 +222,7 @@ class LoaderMod(loader.Module):
 
         if not module_name:
             return await utils.answer(
-                message, "❌ Не удалось загрузить модуль. Подробности смотри в логах")
+                message, "<emoji id=5312526098750252863>❌</emoji><b> Не удалось загрузить модуль. Подробности смотри в логах</b>")
         
         module = '_'.join(module_name.lower().split())
         with open(f'shika/modules/{module}.py', 'w', encoding="utf-8") as file:
@@ -304,7 +304,7 @@ class LoaderMod(loader.Module):
         """Выгрузить модуль. Использование: unloadmod <название модуля>"""
         if not (module_name := self.all_modules.unload_module(args)):
             return await utils.answer(
-                message, "❌ Неверное название модуля")
+                message, "<b><emoji id=5312526098750252863>❌</emoji> Неверное название модуля</b>")
         
         modules = [
             'config',
@@ -320,7 +320,7 @@ class LoaderMod(loader.Module):
         if module_name in modules:
             return await utils.answer(
                 message,
-                "❌ Выгружать встроенные модули нельзя"
+                "<emoji id=5312526098750252863>❌</emoji><b> Выгружать встроенные модули нельзя</b>"
             )
         
         module = '_'.join(module_name.lower().split())
@@ -330,12 +330,12 @@ class LoaderMod(loader.Module):
             pass
 
         return await utils.answer(
-            message, f"✅ Модуль \"<code>{module_name}</code>\" выгружен")
+            message, f"<emoji id=6334758581832779720>✅</emoji><b> Модуль \"<code>{module_name}</code>\" выгружен</b>")
     
     async def reloadmod_cmd(self, app: Client, message: types.Message, args: str):
         if not args:
             return await utils.answer(
-                message, "❌ Вы не указали модуль")
+                message, "<b><emoji id=5312526098750252863>❌</emoji> Вы не указали модуль</b>")
         
         try:
             module = args.split(maxsplit=1)[0].replace('.py', '')
@@ -356,13 +356,13 @@ class LoaderMod(loader.Module):
                 if module == mod:
                     return await utils.answer(
                         message,
-                        "❌ Нельзя перезагружать встроенные модули"
+                        "<emoji id=5312526098750252863>❌</emoji><b> Нельзя перезагружать встроенные модули</b>"
                     )
 
             if module + '.py' not in os.listdir('shika/modules'):
                 return await utils.answer(
                     message,
-                    f'❌ Модуль {module} не найден'
+                    f'<emoji id=5312526098750252863>❌</emoji><b> Модуль {module} не найден</b>'
                 )
             
             unload = self.all_modules.unload_module(module)
@@ -374,18 +374,18 @@ class LoaderMod(loader.Module):
             if not load and not unload:
                 return await utils.answer(
                     message,
-                    '❌ Произошла ошибка, пожалуйста проверьте логи'
+                    '<emoji id=5312526098750252863>❌</emoji><b> Произошла ошибка, пожалуйста проверьте логи</b>'
                 )
         except Exception as error:
             logging.error(error)
             return await utils.answer(
                 message,
-                '❌ Произошла ошибка, пожалуйста проверьте логи'
+                '<emoji id=5312526098750252863>❌</emoji><b> Произошла ошибка, пожалуйста проверьте логи</b>'
             )
 
 
         return await utils.answer(
-            message, f"✅ Модуль \"<code>{module}</code>\" перезагружен")
+            message, f"<b><emoji id=6334758581832779720>✅</emoji> Модуль \"<code>{module}</code>\" перезагружен</b>")
 
     async def restart_cmd(self, app: Client, message: types.Message, update: bool = False):
         """Перезагрузка юзербота"""
@@ -412,7 +412,7 @@ class LoaderMod(loader.Module):
         """Установить репозиторий с модулями. Использование: dlrepo <ссылка на репозиторий или reset>"""
         if not args:
             return await utils.answer(
-                message, "❌ Нет аргументов")
+                message, "<emoji id=5312526098750252863>❌</emoji> <b>Нет аргументов</b>")
 
         if args == "reset":
             self.db.set(
@@ -420,12 +420,12 @@ class LoaderMod(loader.Module):
                 "https://github.com/F1reWs/shika_modules"
             )
             return await utils.answer(
-                message, "✅ Ссылка на репозиторий была сброшена")
+                message, "<emoji id=6334758581832779720>✅</emoji><b> Ссылка на репозиторий была сброшена</b>")
 
         if not await get_git_raw_link(args):
             return await utils.answer(
-                message, "❌ Ссылка указана неверно")
+                message, "<emoji id=5312526098750252863>❌</emoji><b> Ссылка указана неверно</b>")
 
         self.db.set("shika.loader", "repo", args)
         return await utils.answer(
-            message, "✅ Ссылка на репозиторий установлена")
+            message, "<emoji id=6334758581832779720>✅</emoji><b> Ссылка на репозиторий установлена</b>")
