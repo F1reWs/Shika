@@ -157,7 +157,7 @@ class LoaderMod(loader.Module):
             module_version = f" (<code>{mod.version}</code>)"
 
         if mod.author:
-            module_author = f"<b>by <code>{mod.author}</code></b>"
+            module_author = f"<b><emoji id=5220156998779152370>❤️</emoji> by <code>{mod.author}</code></b>"
         
         return await utils.answer(
             message, f"""<b>
@@ -248,7 +248,7 @@ class LoaderMod(loader.Module):
             module_version = f" (<code>{mod.version}</code>)"
 
         if mod.author:
-            module_author = f"<b>by <code>{mod.author}</code></b>"
+            module_author = f"<b><emoji id=5220156998779152370>❤️</emoji> by <code>{mod.author}</code></b>"
         
         return await utils.answer(
             message, f"""<b>
