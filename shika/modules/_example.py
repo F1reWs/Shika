@@ -51,7 +51,7 @@ class ExampleMod(loader.Module):  # Example - название класса мо
         # logging.info(f"Модуль {self.name} загружен")
 
     # Если написать в лс/чате где есть бот "ты дурак?", то он ответит
-    @loader.on_bot(lambda self, app, message: message.text and message.text.lower() == "ты дурак?")  # Сработает только если текст сообщения равняется "ты дурак?"
+    @loader.on_bot(lambda self, app, message: message.text and "ты дурак?" in message.text.lower())  # Сработает только если в сообщении текст "ты дурак?"
     async def example_message_handler(self, app: Client, message: Message):  # _message_handler на конце функции чтобы обозначить что это хендлер сообщения
         """Пример хендлера сообщения"""
         return await message.reply(
