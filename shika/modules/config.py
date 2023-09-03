@@ -100,7 +100,6 @@ class ConfigMod(loader.Module):
         if call.from_user.id != self.db.get("shika.me", "id"):
             return await call.answer('Ты не владелец')
 
-        me = await app.get_me()
         inline_keyboard = InlineKeyboardMarkup(row_width=3, resize_keyboard=True)
         modules = [mod for mod in self.all_modules.modules]
         message: Message = await self.inline_bot.edit_message_text(inline_message_id=call.inline_message_id, text="<b>🌀 Shika</b>", reply_markup=inline_keyboard)
