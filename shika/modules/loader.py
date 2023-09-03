@@ -133,6 +133,9 @@ class LoaderMod(loader.Module):
 
         if error_text:
             return await utils.answer(message, error_text)
+       
+       
+        await message.edit(f"<b><emoji id=5325792861885570739>🔄</emoji> Устанавливаю модуль...</b>")
 
         self.db.set("shika.loader", "modules", list(set(self.db.get("shika.loader", "modules", []) + [args])))
         prefix = self.db.get("shika.loader", "prefixes", ["."])[0]
@@ -159,7 +162,7 @@ class LoaderMod(loader.Module):
         
         return await utils.answer(
             message, f"""<b>
-<emoji id=5891237108974095799>🌈</emoji> Модуль <code>{module_name}</code>{module_version} загружен {utils.ascii_face}
+<emoji id=5891237108974095799>🌈</emoji> Модуль <code>{module_name.name}</code>{module_version} загружен {utils.ascii_face}
 <emoji id=5983568653751160844>ℹ️</emoji> </b><i>{module_name.__doc__ or 'Нет описания для модуля'}</i>
 
 {command_descriptions}
