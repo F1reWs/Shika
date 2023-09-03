@@ -123,7 +123,7 @@ class LoaderMod(loader.Module):
               r.raise_for_status()  # Бросить исключение, если запрос завершился неудачей
 
               mod = await self.all_modules.load_module(r.text, r.url)
-              if mod True:
+              if mod is True:
                   error_text = f"<emoji id=5348498983884960309>🚀</emoji> <b>Зависимости установлены, но нужна перезагрузка </b>{prefix}restart"
 
               if not mod:
