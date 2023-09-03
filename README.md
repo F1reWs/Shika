@@ -21,6 +21,14 @@
 </a>
 <br>
 <hr>
+<table>
+ <tr>
+  <td>
+   <img src="https://api.f1rew.me/file/shika_install.mp4" height="32" align="middle"><b>Легкая установка</b>
+  </td>
+  <td>
+ </tr>
+</table>
 <i>⚠️ This project is provided as-is. Developer doesn't take ANY responsibility over any problems, caused by userbot. By installing Shika you take all risks on you. Please, consider reading https://core.telegram.org/api/terms for more information.</i>
 <br>
 <hr> 
