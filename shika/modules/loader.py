@@ -316,7 +316,7 @@ class LoaderMod(loader.Module):
             'backuper'
         ]
         
-        if module_name in modules:
+        if module_name.lower() in modules.lower():
             return await utils.answer(
                 message,
                 "<emoji id=5312526098750252863>❌</emoji><b> Выгружать встроенные модули нельзя</b>"
@@ -330,62 +330,6 @@ class LoaderMod(loader.Module):
 
         return await utils.answer(
             message, f"<emoji id=6334758581832779720>✅</emoji><b> Модуль \"<code>{module_name}</code>\" выгружен</b>")
-    
-    async def reloadmod_cmd(self, app: Client, message: types.Message, args: str):
-        if not args:
-            return await utils.answer(
-                message, "<b><emoji id=5312526098750252863>❌</emoji> Вы не указали модуль</b>")
-        
-        try:
-            module = args.split(maxsplit=1)[0].replace('.py', '')
-
-            modules = [
-                'config',
-                'eval',
-                'help',
-                'userbot',
-                'backuper',
-                'moduleGuard',
-                'terminal',
-                'tester',
-                'updater',
-                'loader'
-            ]
-            
-            for mod in modules:
-                if module.lower() == mod.lower():
-                    return await utils.answer(
-                        message,
-                        "<emoji id=5312526098750252863>❌</emoji><b> Нельзя перезагружать встроенные модули</b>"
-                    )
-
-            if module + '.py' not in os.listdir('shika/modules'):
-                return await utils.answer(
-                    message,
-                    f'<emoji id=5312526098750252863>❌</emoji><b> Модуль {module} не найден</b>'
-                )
-            
-            unload = self.all_modules.unload_module(module)
-            with open('shika/modules/' + module + '.py', 'r', encoding='utf-8') as file:
-                module_source = file.read()
-
-            load = await self.all_modules.load_module(module_source)
-
-            if not load and not unload:
-                return await utils.answer(
-                    message,
-                    '<emoji id=5312526098750252863>❌</emoji><b> Произошла ошибка, пожалуйста проверьте логи</b>'
-                )
-        except Exception as error:
-            logging.error(error)
-            return await utils.answer(
-                message,
-                '<emoji id=5312526098750252863>❌</emoji><b> Произошла ошибка, пожалуйста проверьте логи</b>'
-            )
-
-
-        return await utils.answer(
-            message, f"<b><emoji id=6334758581832779720>✅</emoji> Модуль \"<code>{module}</code>\" перезагружен</b>")
 
     async def restart_cmd(self, app: Client, message: types.Message, update: bool = False):
         """Перезагрузка юзербота"""
