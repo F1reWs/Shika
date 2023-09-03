@@ -400,7 +400,7 @@ class ModulesManager:
         except Exception as error:
             return logging.exception(error)
 
-        return instance.name
+        return instance
 
     async def send_on_loads(self) -> bool:
         """Отсылает команды выполнения функции"""
