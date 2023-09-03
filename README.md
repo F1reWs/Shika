@@ -24,7 +24,7 @@
 <table>
  <tr>
   <td>
-   <img src="https://api.f1rew.me/file/shika_install.gif" height="700" align="middle"><b>Легкая установка</b>
+   <img src="https://api.f1rew.me/file/shika_install.gif" height="500" align="middle">
   </td>
   <td>
  </tr>
