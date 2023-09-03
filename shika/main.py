@@ -101,7 +101,7 @@ async def main():
             response = requests.post(url, json=payload)     
 
         if not restart["type"] == "update_from_bot":
-            await client.edit_message_text(
+            await app.edit_message_text(
     chat_id=restart["msg"].split(":")[0],
     message_id=restart["msg"].split(":")[1],
     text=restarted_text
