@@ -57,7 +57,7 @@ class ConfigMod(loader.Module):
             'all_modules', 'author', 'bot', 'callback_handlers',
             'command_handlers', 'inline_handlers', 'bot_username',
             'message_handlers', 'name', 'version', 'watcher_handlers',
-            'boot_time', 'shika.bot', 'shika.loader', 'shika.me', 'Updater', 'Loader',
+            'boot_time', 'shika.bot', 'shika.loader', 'shika.me', 'Updater', 'Loader', 'ModuleGuard'
         ]
         self.config = None  # Пoявляется после get_attrs
         self.pending = False
