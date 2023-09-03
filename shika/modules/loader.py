@@ -54,15 +54,12 @@ async def get_git_raw_link(repo_url: str) -> str:
     owner = match.group(1)
     repo = match.group(2)
 
-    # Для получения default_branch можно использовать GitHub API:
-    # Например, так можно получить информацию о репозитории:
     response = await utils.run_sync(requests.get, f"https://api.github.com/repos/{owner}/{repo}")
     if response.status_code == 200:
          default_branch = response.json().get("default_branch", "main")
     else:
-         default_branch = "main"  # Используйте значение по умолчанию
+         default_branch = "main" 
 
-    # Вместо {default_branch} подставьте значение вашей переменной default_branch
     raw_url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/"
 
     return raw_url
