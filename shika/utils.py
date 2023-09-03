@@ -325,8 +325,7 @@ def ascii_face() -> str:
     Returnes cute ASCII-art face
     :return: ASCII-art face
     """
-    return escape_html(
-        random.choice(
+    return random.choice(
             [
                 "ヽ(๑◠ܫ◠๑)ﾉ",
                 "(◕ᴥ◕ʋ)",
