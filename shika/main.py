@@ -102,8 +102,8 @@ async def main():
 
         if not restart["type"] == "update_from_bot":
             await app.edit_message_text(
-    chat_id=restart["msg"].split(":")[0],
-    message_id=restart["msg"].split(":")[1],
+    chat_id=int(restart["msg"].split(":")[0]),
+    message_id=int(restart["msg"].split(":")[1]),
     text=restarted_text
            )
             db.pop("shika.loader", "restart")
