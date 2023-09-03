@@ -350,7 +350,7 @@ class LoaderMod(loader.Module):
             ]
             
             for mod in modules:
-                if module == mod:
+                if module.lower() == mod.lower():
                     return await utils.answer(
                         message,
                         "<emoji id=5312526098750252863>❌</emoji><b> Нельзя перезагружать встроенные модули</b>"
