@@ -21,6 +21,7 @@ import time
 from .terminal import bash_exec
 from pyrogram import Client, types
 from datetime import timedelta
+from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from .. import __version__, loader, utils, validators
 from ..types import Config, ConfigValue
 
@@ -38,6 +39,21 @@ class AboutMod(loader.Module):
                 value='',
             )
         )
+    
+    @loader.on_bot(lambda self, app, message: message.text and "/start" in message.text.lower())
+    async def start_message_handler(self, app: Client, message: Message):
+        """Start хэндлер"""
+        keyboard = InlineKeyboardMarkup(
+     ).add(
+        InlineKeyboardButton("🐈‍⬛ Github", url="https://github.com/F1reWs/Shika"),
+     ).add(
+        InlineKeyboardButton("🗞 Новости", url="https://t.me/shikaub"),
+        InlineKeyboardButton("💬 Чат", url="https://t.me/shika_chat"),
+     )
+        return await message.answer_photo(photo="https://zefirka.club/uploads/posts/2022-11/1668857696_5-zefirka-club-p-telegram-s-oboyami-dlya-telefona-5.jpg", caption="""<b>
+🌀 <a href="https://github.com/F1reWs/Shika">Shika</a> - лучший и мощный Telegram юзербот!
+Вы можете установить Shika на свой аккаунт.
+</b>""", reply_markup=keyboard)
         
     
     async def info_cmd(self, app: Client, message: types.Message):
