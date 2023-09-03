@@ -36,7 +36,8 @@ class ModuleGuardMod(loader.Module):
 
 
     async def on_load(self, app: types.Message):
-        if self.db.get('ModuleGuard', 'send') == True:
+            if self.db.get('ModuleGuard', 'send') == False:
+                return
             names = {
                 "info": [
                     {"id": "other", "name": "other"},
