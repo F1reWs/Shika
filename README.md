@@ -10,7 +10,7 @@
 </p>
 <hr>
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=The+best+telegram+userbot)](https://t.me/shikaub)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=The+best+telegram+userbot.)](https://t.me/shikaub)
 <hr>
 <h1>Channel and Group</h1>
 <a href="https://t.me/shikaub">
