@@ -101,13 +101,12 @@ async def main():
             response = requests.post(url, json=payload)     
 
         if not restart["type"] == "update_from_bot":
-         await client.edit_message_text(
+            await client.edit_message_text(
     chat_id=restart["msg"].split(":")[0],
     message_id=restart["msg"].split(":")[1],
     text=restarted_text
            )
-            
-          db.pop("shika.loader", "restart")
+            db.pop("shika.loader", "restart")
       except:
         token = db.get("shika.bot", "token")
         url = f'https://api.telegram.org/bot{token}/sendMessage?'
