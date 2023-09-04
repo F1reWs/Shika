@@ -45,12 +45,39 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3-pip && sudo a
    <img src="https://api.f1rew.me/file/shika_install.gif" height="400" align="middle">
 </table>
 
+<h1>Модули</h1>
+> Модули для Shika, ты можешь найти по <a href="https://t.me/shika_chat/12">этой ссылке</a>
+
+<h2>Пример модуля</h2>
+
+> Больше примеров функций и полное описание смотри в файле <a href="./shika/modules/_example.py">_example.py</a>
+
+<pre lang="python">
+from pyrogram import Client, types
+from .. import loader, utils
+
+
+@loader.module(name="Example")
+class ExampleMod(loader.Module):
+    """Описание модуля"""
+
+    async def example_cmd(self, app: Client, message: types.Message):
+        """Описание команды"""
+        return await utils.answer(
+            message, "Пример команды")
+
+    @loader.on(lambda _, __, m: m and m.text == "Привет, это проверка вотчера")
+    async def watcher(self, app: Client, message: types.Message):
+        return await message.reply(
+            "Привет, все работает отлично")
+</pre>
+
 <hr>
 <h1>Канал и чат</h1>
 <a href="https://t.me/shikaub">
 <img alt="Telegram" src="https://img.shields.io/badge/Telegram_Channel-0a0a0a?style=for-the-badge&logo=telegram">
 </a>
-<a href="https://t.me/shika_talks">
+<a href="https://t.me/shika_chat">
 <img alt="Telegram" src="https://img.shields.io/badge/Telegram_Chat-0a0a0a?style=for-the-badge&logo=telegram">
 </a>
 <br>
