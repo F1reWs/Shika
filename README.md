@@ -14,7 +14,7 @@
 <hr>
 
 <h1>Установка</h1>
-- Termux (Download termux from [this link](https://f-droid.org/repo/com.termux_118.apk).)<br>⚠️ Version from Play Store not working!
+- Termux (Download termux from <a href="https://f-droid.org/repo/com.termux_118.apk"></a>)<br>⚠️ Version from Play Store not working!
 
 ```
 pkg update -y && pkg install python3 && pkg install git && pkg install libjpeg-turbo && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
@@ -26,7 +26,7 @@ pkg update -y && pkg install python3 && pkg install git && pkg install libjpeg-t
 sudo apt update && sudo apt upgrade -y && sudo apt install python3-pip && sudo apt install git -y && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
 ```
 
-<h3>Mac OS</h2>
+- Mac OS
 <h4>Install</h3>
 
 - Install <a href="https://www.python.org/downloads/">python3</a>
