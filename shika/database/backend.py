@@ -53,7 +53,7 @@ class CloudDatabase:
         print(self.data_chat)
         return (
             await self._app.send_message(
-                self.data_chat.chat.id, message
+                self.data_chat.cid, message
             )
             if isinstance(message, str)
             else await message.copy(self.data_chat.chat.id)
