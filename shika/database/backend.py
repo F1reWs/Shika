@@ -36,8 +36,8 @@ class CloudDatabase:
         """Информация о чате с данными"""
         if not self.data_chat:
             chat = [
-                dialog.chat async for dialog in self._app.iter_dialogs()
-                if dialog.chat.title == f"sh1t-{self._me.id}-data"
+                dialog.chat async for dialog in self._app.get_dialogs()
+                if dialog.chat.title == f"shika-{self._me.id}-data"
                 and dialog.chat.type == "supergroup"
             ]
 
@@ -46,16 +46,16 @@ class CloudDatabase:
             else:
                 self.data_chat = chat[0]
 
-        return self.data_chat
+        return self.dialog
 
     async def save_data(self, message: Union[types.Message, str]):
         """Сохранить данные в чат"""
         return (
             await self._app.send_message(
-                self.data_chat.id, message
+                self.dialog.data_chat.id, message
             )
             if isinstance(message, str)
-            else await message.copy(self.data_chat.id)
+            else await message.copy(self.dialog.data_chat.id)
         )
 
     async def get_data(self, message_id: int):
