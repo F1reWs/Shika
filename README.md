@@ -2,7 +2,7 @@
     </a>
     <img alt="Telegram" width="500px" src="https://api.f1rew.me/file/shika_logo.jpg">
     <br>
-    <b>ShikaUB v0.0.0 BETA</b>
+    <b>ShikaUB v1.0.0</b>
     <br>
     <b>Telegram userbot</b>
 <br><br>
