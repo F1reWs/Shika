@@ -86,7 +86,7 @@ class HelpMod(loader.Module):
             ) + (
                 f"⏺ Тег: <b>{module.tag}</b>\n" if module.tag else ""
             ) + (
-                f"\n<emoji id=5400093244895797589>📄</emoji> Описание:\n"
+                f"\n<emoji id=5400093244895797589>📄</emoji> <b>Описание:</b>\n"
                 f"    ╰ {module.__doc__ or 'Нет описания для модуля'}\n\n"
             )
         )
