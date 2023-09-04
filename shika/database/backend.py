@@ -42,7 +42,7 @@ class CloudDatabase:
             ]
 
             if not chat:
-                self.data_chat = await self._app.create_supergroup(f"sh1t-{self._me.id}-data")
+                self.data_chat = await self._app.create_supergroup(f"shika-{self._me.id}-data")
             else:
                 self.data_chat = chat[0]
 
@@ -55,7 +55,7 @@ class CloudDatabase:
                 self.data_chat.chat.id, message
             )
             if isinstance(message, str)
-            else await message.copy(self.dialog.data_chat.id)
+            else await message.copy(self.data_chat.chat.id)
         )
 
     async def get_data(self, message_id: int):
