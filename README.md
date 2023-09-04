@@ -14,7 +14,7 @@
 <hr>
 
 <h1>Установка</h1>
-- Termux (Download termux from <a href="https://f-droid.org/repo/com.termux_118.apk"></a>)<br>⚠️ Version from Play Store not working!
+- Termux (Download termux from <a href="https://f-droid.org/repo/com.termux_118.apk">this link</a>)<br>⚠️ Version from Play Store not working!
 
 ```
 pkg update -y && pkg install python3 && pkg install git && pkg install libjpeg-turbo && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
