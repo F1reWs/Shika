@@ -14,7 +14,7 @@
 <hr>
 
 <h1>Установка</h1>
-- Termux (Download termux from <a href="https://f-droid.org/repo/com.termux_118.apk">this link</a>)<br>⚠️ Version from Play Store not working!
+- Termux (Скачать термукс можно по <a href="https://f-droid.org/repo/com.termux_118.apk">этой ссылке</a>)<br>⚠️ Версия с PlayStore не работает!
 
 ```
 pkg update -y && pkg install python3 && pkg install git && pkg install libjpeg-turbo && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
@@ -27,21 +27,25 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3-pip && sudo a
 ```
 
 - Mac OS
-<h4>Install</h3>
+- Установи <a href="https://www.python.org/downloads/">Python 3.9+</a>
 
-- Install <a href="https://www.python.org/downloads/">python3</a>
+- Скачай и разархивируй<a href="https://github.com/F1reWs/Shika/archive/refs/heads/main.zip">This file</a>
 
-- Download and Unzip <a href="https://github.com/Master-Stroke/SharkUserBot/archive/refs/heads/main.zip">This file</a>
+- Напиши в терминале `pip install -r requirements.txt`
 
-- Write in terminal `pip install -r requirements.txt`
+<h4>Что бы включить Shika</h3>
 
-<h4>How to start on Mac OS</h3>
-
-- Type in terminal `python3 -m sharkub`
+- Напиши в терминале `python3 -m sharkub`
 <hr>
 
+<h1>Авторизация</h1>
+В Shika авторизация, <b>быстрая</b> и </b>
+<table>
+   <img src="https://api.f1rew.me/file/shika_install.gif" height="400" align="middle">
+</table>
+
 <hr>
-<h1>Channel and Group</h1>
+<h1>Канал и чат</h1>
 <a href="https://t.me/shikaub">
 <img alt="Telegram" src="https://img.shields.io/badge/Telegram_Channel-0a0a0a?style=for-the-badge&logo=telegram">
 </a>
@@ -50,9 +54,6 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3-pip && sudo a
 </a>
 <br>
 <hr>
-<table>
-   <img src="https://api.f1rew.me/file/shika_install.gif" height="400" align="middle">
-</table>
 <i>⚠️ This project is provided as-is. Developer doesn't take ANY responsibility over any problems, caused by userbot. By installing Shika you take all risks on you. Please, consider reading https://core.telegram.org/api/terms for more information.</i>
 <br>
 <hr> 
