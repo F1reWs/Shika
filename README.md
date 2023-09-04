@@ -46,6 +46,7 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3-pip && sudo a
 </table>
 
 <h1>Модули</h1>
+
 > Модули для Shika, ты можешь найти по <a href="https://t.me/shika_chat/12">этой ссылке</a>
 
 <h2>Пример модуля</h2>
