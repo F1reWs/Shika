@@ -46,13 +46,13 @@ class CloudDatabase:
             else:
                 self.data_chat = chat[0]
 
-        return self.dialog
+        return self.data_chat
 
     async def save_data(self, message: Union[types.Message, str]):
         """Сохранить данные в чат"""
         return (
             await self._app.send_message(
-                self.dialog.data_chat.id, message
+                self.data_chat.chat.id, message
             )
             if isinstance(message, str)
             else await message.copy(self.dialog.data_chat.id)
@@ -61,5 +61,5 @@ class CloudDatabase:
     async def get_data(self, message_id: int):
         """Найти данные по айди сообщения"""
         return await self._app.get_messages(
-            self.data_chat.id, message_id
+            self.data_chat.chat.id, message_id
         )
