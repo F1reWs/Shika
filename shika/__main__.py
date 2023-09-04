@@ -35,9 +35,4 @@ def parse_arguments():
     )
 
 if __name__ == "__main__":
-
-
-    # import logging                          # РАЗКОММЕНТИРУЙТЕ ЭТО ЕСЛИ У ВАС БЕСКОНЕЧНАЯ ЗАГРУЗКА
-    # logging.basicConfig(level=logging.INFO)
-    
     asyncio.run(main.main())
