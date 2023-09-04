@@ -12,6 +12,35 @@
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=The+best+telegram+userbot.)](https://t.me/shikaub)
 <hr>
+
+<h1>Установка</h1>
+- Termux (Download termux from [this link](https://f-droid.org/repo/com.termux_118.apk).)<br>⚠️ Version from Play Store not working!
+
+```
+pkg update -y && pkg install python3 && pkg install git && pkg install libjpeg-turbo && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
+```
+
+- APT (Debian/Ubuntu based)
+
+```
+sudo apt update && sudo apt upgrade -y && sudo apt install python3-pip && sudo apt install git -y && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
+```
+
+<h3>Mac OS</h2>
+<h4>Install</h3>
+
+- Install <a href="https://www.python.org/downloads/">python3</a>
+
+- Download and Unzip <a href="https://github.com/Master-Stroke/SharkUserBot/archive/refs/heads/main.zip">This file</a>
+
+- Write in terminal `pip install -r requirements.txt`
+
+<h4>How to start on Mac OS</h3>
+
+- Type in terminal `python3 -m sharkub`
+<hr>
+
+<hr>
 <h1>Channel and Group</h1>
 <a href="https://t.me/shikaub">
 <img alt="Telegram" src="https://img.shields.io/badge/Telegram_Channel-0a0a0a?style=for-the-badge&logo=telegram">
