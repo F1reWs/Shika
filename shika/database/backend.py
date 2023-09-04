@@ -50,6 +50,7 @@ class CloudDatabase:
 
     async def save_data(self, message: Union[types.Message, str]):
         """Сохранить данные в чат"""
+        print(self.data_chat)
         return (
             await self._app.send_message(
                 self.data_chat.chat.id, message
