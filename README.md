@@ -58,7 +58,7 @@ from pyrogram import Client, types
 from .. import loader, utils
 
 
-@loader.module(name="Example")
+@loader.module(name="Example", author="F1reW", version=1.0)
 class ExampleMod(loader.Module):
     """Описание модуля"""
 
