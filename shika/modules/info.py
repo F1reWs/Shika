@@ -66,7 +66,7 @@ class AboutMod(loader.Module):
         me = (await app.get_me()).first_name
         build = utils.get_commit_url()
 
-        version = "0.0.0"
+        version = "1.0.0"
 
         default = f"""
 <b>🌀 Shika</b>
