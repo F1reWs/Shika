@@ -27,19 +27,20 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3-pip && sudo a
 ```
 
 - Mac OS
-- Установи <a href="https://www.python.org/downloads/">Python 3.9+</a>
 
-- Скачай и разархивируй<a href="https://github.com/F1reWs/Shika/archive/refs/heads/main.zip">This file</a>
+Установи <a href="https://www.python.org/downloads/">Python 3.9+</a>
 
-- Напиши в терминале `pip install -r requirements.txt`
+Скачай и разархивируй <a href="https://github.com/F1reWs/Shika/archive/refs/heads/main.zip">этот файл</a>
+
+Напиши в терминале `pip install -r requirements.txt`
 
 <h4>Что бы включить Shika</h3>
 
-- Напиши в терминале `python3 -m sharkub`
+Напиши в терминале `python3 -m shika`
 <hr>
 
 <h1>Авторизация</h1>
-В Shika авторизация, <b>быстрая</b> и </b>
+В Shika авторизация, <b>быстрая</b> и <b>лёгкая</b>
 <table>
    <img src="https://api.f1rew.me/file/shika_install.gif" height="400" align="middle">
 </table>
