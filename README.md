@@ -55,6 +55,6 @@ sudo apt update && sudo apt upgrade -y && sudo apt install python3-pip && sudo a
 </a>
 <br>
 <hr>
-<i>⚠️ This project is provided as-is. Developer doesn't take ANY responsibility over any problems, caused by userbot. By installing Shika you take all risks on you. Please, consider reading https://core.telegram.org/api/terms for more information.</i>
+<i>⚠️ Этот проект предоставляется «как есть». Разработчик не несет НИКАКОЙ ответственности за любые проблемы, вызванные пользовательским ботом. Устанавливая Шику, вы берете на себя все риски. Пожалуйста, прочтите https://core.telegram.org/api/terms для получения дополнительной информации.</i>
 <br>
 <hr> 
