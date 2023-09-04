@@ -15,7 +15,7 @@
 
 #    GNU General Public License https://www.gnu.org/licenses.
 
-__version__ = (0, 0, 0)
+__version__ = (1, 0, 0)
 
 import os
 
@@ -26,4 +26,4 @@ try:
         path=os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     ).active_branch.name
 except Exception:
-    branch = "master"
+    branch = "main"
