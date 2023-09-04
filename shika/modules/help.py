@@ -80,7 +80,7 @@ class HelpMod(loader.Module):
 
         header = (
             f"<emoji id=5361735750968679136>🖥</emoji> <b>{module.name}</b>\n" + (
-                f"<emoji id=5224695503605735506>🧑‍💻</emoji> Автор: <b>{module.author}</b>\n" if module.author else ""
+                f"<emoji id=5224695503605735506>🧑‍💻</emoji> <b>Автор:</b> <code>{module.author}</code>\n" if module.author else ""
             ) + (
                 f"<emoji id=5224695503605735506>⌨️</emoji> Версия: <b>{module.version}</b>\n" if module.version else ""
             ) + (
