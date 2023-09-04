@@ -59,10 +59,10 @@ class Database(LightDB):
         self.save()
         return value
 
-     async def save_data(self, message: Union[types.Message, str]):
+    async def save_data(self, message: Union[types.Message, str]):
          """Сохранить данные в чат"""
          return await self.cloud.save_data(message)
 
-     async def get_data(self, message_id: int):
+    async def get_data(self, message_id: int):
          """Найти данные по айди сообщения"""
          return await self.cloud.get_data(message_id)
