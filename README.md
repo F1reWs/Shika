@@ -17,13 +17,13 @@
 - Termux (Скачать термукс можно по <a href="https://f-droid.org/repo/com.termux_118.apk">этой ссылке</a>)<br>⚠️ Версия с PlayStore не работает!
 
 ```
-pkg update -y && pkg install python3 && pkg install python3-pip && pkg install git && pkg install libjpeg-turbo && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
+pkg update -y && pkg install python3 -y && pkg install python3-pip -y && pkg install git -y && pkg install libjpeg-turbo -y && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
 ```
 
 - APT (Debian/Ubuntu based)
 
 ```
-apt update && apt upgrade -y && apt install python3-pip && apt install git -y && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
+apt update && apt upgrade -y && apt install python3-pip -y && apt install git -y && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
 ```
 
 - Pacman (Arch based)
