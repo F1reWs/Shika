@@ -279,10 +279,10 @@ reply_markup=keyboard, parse_mode="Markdown")
 
 **Текущее:** ```{now_data}```
 
-**📁 Должно быть:** ```{what_data}```
+**📁 Должно быть {what_data}**
 ''',
     reply_markup=keyboard,
-    parse_mode="Markdown"
+    parse_mode="MarkdownV2"
 )
 
     @loader.on_bot(lambda _, __, data: data.data == 'aaa')
