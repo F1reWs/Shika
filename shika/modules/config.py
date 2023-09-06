@@ -124,7 +124,7 @@ class ConfigMod(loader.Module):
             for namee in attrs:
                 try:
                   defa = self.config.get_default(namee)
-                  if defa:
+                  if defa or defa == "":
                       con += 1
                 except:
                  pass
