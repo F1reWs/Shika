@@ -87,7 +87,7 @@ class ConfigMod(loader.Module):
                 key.startswith('__') and key.endswith('__')
             ) and key not in self.DEFAULT_ATTRS
         ]
-        if len(attrs) > 1:
+        if len(attrs) > 0:
             self.config = getattr(module, attrs[0][0])
             self.config_db: database.Database = attrs[1][1]
 
