@@ -273,7 +273,7 @@ reply_markup=keyboard, parse_mode="Markdown")
     text=f'''**⚙️ Модуль:** `{self.pending_module.name}`
 **➡ Атрибут:** `{attribute}`
 
-**__{description}__**
+**_{description}_**
 
 **Стандарт:** ```{standart_arg}```
 
@@ -282,7 +282,7 @@ reply_markup=keyboard, parse_mode="Markdown")
 **📁 Должно быть {what_data}**
 ''',
     reply_markup=keyboard,
-    parse_mode="MarkdownV2"
+    parse_mode="Markdown"
 )
 
     @loader.on_bot(lambda _, __, data: data.data == 'aaa')
