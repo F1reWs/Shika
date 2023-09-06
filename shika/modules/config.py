@@ -27,6 +27,7 @@ from asyncio import sleep
 
 from .. import loader, utils, database, validators
 from ..types import ConfigValue
+from ..types import Config as cfg
 
 # distutils will be deleted in python 3.12
 # distutils будет удалена в python 3.12
@@ -120,7 +121,7 @@ class ConfigMod(loader.Module):
             con = 1
 
             for namee in attrs:
-               if self.config.get_default(namee):
+               if cfg.get_default(namee):
                  con += 1
         
             if con == 1:
