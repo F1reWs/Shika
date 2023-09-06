@@ -122,8 +122,12 @@ class ConfigMod(loader.Module):
             con = 1
 
             for namee in attrs:
-               if self.cfg.get_default(self, namee):
-                 con += 1
+                try:
+                  defa = self.config.get_default(namee)
+                  if defa:
+                      con += 1
+                except:
+                 pass
         
             if con == 1:
                pass
