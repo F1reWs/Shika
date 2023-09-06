@@ -269,8 +269,8 @@ reply_markup=keyboard, parse_mode="Markdown")
         )
         
         await self.inline_bot.edit_message_text(
-inline_message_id=call.inline_message_id,
-text=f'''**⚙️ Модуль:** `{self.pending_module.name}`
+    inline_message_id=call.inline_message_id,
+    text=f'''**⚙️ Модуль:** `{self.pending_module.name}`
 **➡ Атрибут:** `{attribute}`
 
 **__{description}__**
@@ -279,9 +279,11 @@ text=f'''**⚙️ Модуль:** `{self.pending_module.name}`
 
 **Текущее:** ```{now_data}```
 
-**📁 Должно быть** {what_data}
+**📁 Должно быть:** ```{what_data}```
 ''',
-reply_markup=keyboard, parse_mode="Markdown")
+    reply_markup=keyboard,
+    parse_mode="Markdown"
+)
 
     @loader.on_bot(lambda _, __, data: data.data == 'aaa')
     async def aaa_callback_handler(self, app: Client, call: CallbackQuery):
