@@ -122,7 +122,7 @@ class ConfigMod(loader.Module):
             con = 1
 
             for namee in attrs:
-               if self.cfg.get_default(namee):
+               if self.cfg.get_default(self, namee):
                  con += 1
         
             if con == 1:
