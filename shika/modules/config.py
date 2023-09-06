@@ -270,17 +270,17 @@ reply_markup=keyboard, parse_mode="Markdown")
         
         await self.inline_bot.edit_message_text(
 inline_message_id=call.inline_message_id,
-text=f'''**⚙️ Модуль: `{self.pending_module.name}`
-➡ Атрибут: `{attribute}`
+text=f'''**⚙️ Модуль:** `{self.pending_module.name}`
+**➡ Атрибут:** `{attribute}`
 
-</b><i>{description}</i><b>
+**__{description}__**
 
-Стандарт: ```{standart_arg}```
+**Стандарт:** ```{standart_arg}```
 
-Текущее: ```{now_data}```
+**Текущее:** ```{now_data}```
 
-📁 Должно быть {what_data}
-**''',
+**📁 Должно быть** {what_data}
+''',
 reply_markup=keyboard, parse_mode="Markdown")
 
     @loader.on_bot(lambda _, __, data: data.data == 'aaa')
