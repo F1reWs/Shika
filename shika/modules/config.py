@@ -199,14 +199,14 @@ reply_markup=inline_keyboard)
             if isinstance(value, tuple):
                 formated = ', '.join(f"{k}: {v}" for k, v in value)
 
-            attributes.append(f'<b>➡ <b>(Тип {type(value).__name__})</b> <code>{key}</code>: <code>{formated}</code></b>')
+            attributes.append(f'**➡ (Тип {type(value).__name__}) `{key}`: ```{formated}```**')
 
         attributes_text = '\n'.join(attributes)
 
         await self.inline_bot.edit_message_text(
 inline_message_id=call.inline_message_id,
-text=f'<b>⚙️ Модуль: <code>{mod.name}</code>\n\n{attributes_text}</b>',
-reply_markup=keyboard)
+text=f'**⚙️ Модуль: `{mod.name}`\n\n{attributes_text}**',
+reply_markup=keyboard, parse_mode="Markdown")
 
     @loader.on_bot(lambda _, __, call: call.data.startswith('ch_attr_'))
     async def change_attribute_callback_handler(self, app: Client, call: CallbackQuery):
@@ -270,18 +270,18 @@ reply_markup=keyboard)
         
         await self.inline_bot.edit_message_text(
 inline_message_id=call.inline_message_id,
-text=f'''<b>⚙️ Модуль: <code>{self.pending_module.name}</code>
-➡ Атрибут: <code>{attribute}</code>
+text=f'''**⚙️ Модуль: `{self.pending_module.name}`
+➡ Атрибут: `{attribute}`
 
 </b><i>{description}</i><b>
 
-Стандарт: <code>{standart_arg}</code>
+Стандарт: ```{standart_arg}```
 
-Текущее: <code>{now_data}</code>
+Текущее: ```{now_data}```
 
 📁 Должно быть {what_data}
-</b>''',
-reply_markup=keyboard)
+**''',
+reply_markup=keyboard, parse_mode="Markdown")
 
     @loader.on_bot(lambda _, __, data: data.data == 'aaa')
     async def aaa_callback_handler(self, app: Client, call: CallbackQuery):
