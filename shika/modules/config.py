@@ -120,7 +120,7 @@ class ConfigMod(loader.Module):
             con = 1
 
             for namee in attrs:
-               if namee not in self.DEFAULT_ATTRS or self.config.get_default(namee):
+               if self.config.get_default(namee):
                  con += 1
         
             if con == 1:
