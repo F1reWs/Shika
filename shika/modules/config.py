@@ -65,6 +65,7 @@ class ConfigMod(loader.Module):
         self.pending_id = utils.random_id(50)
         self.pending_module = False
         self.pending_edit = False
+        self.cfg = cfg
 
     def get_module(self, data: str) -> loader.Module:
         return next((module for module in self.all_modules.modules if module.name.lower() in data.lower()), None)
@@ -121,7 +122,7 @@ class ConfigMod(loader.Module):
             con = 1
 
             for namee in attrs:
-               if cfg.get_default(namee):
+               if self.cfg.get_default(namee):
                  con += 1
         
             if con == 1:
