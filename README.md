@@ -23,7 +23,7 @@ pkg update -y && pkg install python3 -y && pkg install python3-pip -y && pkg ins
 - APT (Debian/Ubuntu based)
 
 ```
-apt update && apt upgrade -y && apt install python3-pip -y && apt install git -y && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
+apt update -y && apt upgrade -y && apt install python3-pip -y && apt install git -y && git clone https://github.com/F1reWs/Shika && cd Shika && pip3 install -r requirements.txt && bash start.sh
 ```
 
 - Pacman (Arch based)
