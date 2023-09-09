@@ -64,6 +64,7 @@ class EvalMod(loader.Module):
                 'm': message,
                 'args': args,
                 "db": self.db,
+                "pyrogram": __import__("pyrogram"),
             }
         )
         await utils.answer(
