@@ -93,3 +93,11 @@ class ExampleMod(loader.Module):
 <i>⚠️ Этот проект предоставляется «как есть». Разработчик не несет НИКАКОЙ ответственности за любые проблемы, вызванные пользовательским ботом. Устанавливая Shika, вы берете на себя все риски. Пожалуйста, прочтите https://core.telegram.org/api/terms для получения дополнительной информации.</i>
 <br>
 <hr> 
+<b>Спасибо:</b>
+
+<ul>
+    <li><a href="https://github.com/Codwizer">CodWiz</a> Разработчик Shika</li>
+    <li><a href="https://t.me/HotDrify">HotDrify</a> Создатель юзербота teagram, который есть базой Shika</li>
+    <li><a href="https://t.me/Fl1yd">Fl1yd</a> Создатель юзербота sh1t-ub который есть базой Shika</li>
+    <li><a href="https://github.com/delivrance">Dan</a> Создатель pyrogram на чём написан сам юзербот</li>
+</ul>
