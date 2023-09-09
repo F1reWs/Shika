@@ -97,7 +97,7 @@ class ExampleMod(loader.Module):
 
 <ul>
     <li><a href="https://github.com/Codwizer">CodWiz</a> - Разработчик Shika</li>
-    <li><a href="https://t.me/y9hotdrify">HotDrify</a>, <a href="https://t.me/itlayz">Layz</a> - Создатели юзербота teagram, который есть базой Shika</li>
+    <li><a href="https://t.me/y9hotdrify">HotDrify</a>, <a href="https://t.me/itzlayz">layz</a> - Создатели юзербота teagram, который есть базой Shika</li>
     <li><a href="https://t.me/Fl1yd">Fl1yd</a> - Создатель юзербота sh1t-ub который есть базой Shika</li>
     <li><a href="https://github.com/delivrance">Dan</a> - Создатель pyrogram на чём написан сам юзербот</li>
 </ul>
